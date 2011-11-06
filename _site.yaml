@@ -2,6 +2,7 @@ handlers:
 - url: '/'
   static_files: 'index.html'
   upload: '.*'
+  
 # static files
 - url: '/ego'
   static_files: 'ego/index.html'
@@ -15,16 +16,20 @@ handlers:
 - url: '/projects'
   static_files: 'projects/index.html'
   upload: '.*'
+  
 # blog article: /2011/10/Something(/)
 - url: '/(.*?)/(.*?)/(.*?)/?'
   static_files: '\1/\2\/3/index.html'
+  upload: '.*'
+  
 # special categories/tags
-- url: '/(.*)/(.*)'
-  static_files: '_site/\1/\2'
-  upload: '_site/.*'
+- url: '/(.*)/(.*)/?'
+  static_files: '\1/\2/index.html'
+  upload: '.*'
 - url: '/([^/]+)'
   static_files: '\1'
   upload: '.*'
+  
 # css, images and js
 - url: '/media/(.*)'
   static_files: 'media/\1'
