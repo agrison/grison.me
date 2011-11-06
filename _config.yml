@@ -16,12 +16,7 @@ related_limit:      5
 excerpt_link:       "Read More&hellip;"
 
 # Plugins
-disqus_short_name:  josediazgonzalez
-ga_tracking_id:     'UA-8668344-3'
 category_dir:       categories
-code_dir:           code
-post_types:
-  - portfolio
 index_pages:
   category:
     do_related:     false

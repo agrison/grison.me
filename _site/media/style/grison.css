@@ -216,9 +216,9 @@ img[alt='Hello'] {
   -moz-border-radius: 10px;   
   -khtml-border-radius: 10px;       
   -webkit-border-radius: 10px;
-  -moz-box-shadow: 1px 1px 200px #000; 
-  -webkit-box-shadow: 1px 1px 200px #000; 
-  box-shadow: 1px 1px 200px #000; 
+  -moz-box-shadow: 1px 1px 50px #000; 
+  -webkit-box-shadow: 1px 1px 50px #000; 
+  box-shadow: 1px 1px 50px #000; 
   margin: 0 auto;
   display: block;
 }
