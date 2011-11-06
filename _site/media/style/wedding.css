@@ -1,0 +1,269 @@
+@import url('fonts.css');
+
+
+html { 
+  text-rendering: optimizeLegibility;
+	background: #f5ffeb url('../images/bkg.png') top left;
+	color: #333;
+}
+body {
+	width:950px;
+	margin:0 auto;
+	font-family: 'Nobile';
+}
+
+/** ------------------------------------------------
+                      header
+    ------------------------------------------------ **/
+body > header {
+  margin:0;
+  border-bottom: 2px solid #555;
+  margin: 22px 0 0 0;
+  padding-left: 100px;
+  height: 160px;
+  background: url('../images/olivier.png') no-repeat;
+}
+body > header > h1 { padding-top: 50px; padding-left: 40px;}
+body > header > h1 > a {
+  color: #555;
+  text-shadow: 0px 0px 2px #333;
+  font-family: 'Ubuntu Mono';
+  font-size: 34px;
+  opacity: 0.9;
+}
+body > header > h1 > a > span {
+  font-size: 30px;
+  opacity: 0.66;
+}
+body > header > h2 {
+  font-family: 'Nova Script';
+  color: #555;
+  margin-top: -15px;
+  font-style: italic;
+  font-size: 14px;
+  text-shadow: 0px 0px 2px #d0cec9;
+  padding-left: 40px;
+}
+
+
+/** ------------------------------------------------
+                      menu
+    ------------------------------------------------ **/
+header > nav {
+  margin-left: 350px;
+  margin-top: -50px;
+  font-family: 'Nova Script', georgia, serif;
+  font-size: 18px;
+  line-height: 22px;
+}
+header > nav ul li {
+  display: inline;
+  margin: 0px 5px;
+  margin-bottom: 20px;
+}
+header > nav ul li a {
+  color: #ff6666;
+  font-size: 16px;
+  font-weight: normal;
+  text-transform: lowercase;
+  text-align: center;
+  padding: 5px 20px;
+}
+header > nav ul li.home a {
+  background: #555;
+  color: white;
+  -moz-border-radius: 10px;		
+  -khtml-border-radius: 10px;				
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+header > nav ul li.home a:hover { text-shadow: 0px 0px 0px white; }
+header > nav ul li a:hover {
+  text-shadow: 1px 1px 1px lightgreen;
+}
+
+
+/** ------------------------------------------------
+                  content and post
+    ------------------------------------------------ **/
+#content {
+  margin : 0 auto;
+}
+section.posts > article {
+  background: url('../images/post.png') bottom center no-repeat;
+  padding-bottom: 50px;
+  margin-bottom: 30px;
+  text-align: justify;
+}
+div.postmeta time {
+  float: left;
+  clear: both;
+	margin-left: -70px;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	opacity: 0.5;
+	width: 40px;
+	text-shadow: 0px 0px 2px rgb(102, 152, 255);
+	text-align: center;
+	color: #7d7b77;
+	font-family:DroidMono,monospace;
+	font-weight: bold;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+article p img {
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	box-shadow: 1px 1px 12px #333;
+	-moz-box-shadow: 1px 1px 12px #333;
+	-webkit-box-shadow: 1px 1px 12px #333;
+}
+
+pre.prettyprint {
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	box-shadow: 1px 1px 12px #333;
+	-moz-box-shadow: 1px 1px 12px #333;
+	-webkit-box-shadow: 1px 1px 12px #333;
+	background-color: #222;
+}
+#adminTagPanel {
+  position: absolute;
+  right: 0px;
+}
+.tag {
+  background: #444;
+  color: white;
+  padding: 3px;
+  padding-right: 6px; padding-left: 6px;
+  text-align: center;
+  font-size: 0.8em;
+  -moz-border-radius: 10px;		
+  -khtml-border-radius: 10px;				
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  margin: 2px;
+  margin-bottom: 5px;
+  display: block;
+	box-shadow: 1px 1px 12px #333;
+	-moz-box-shadow: 1px 1px 12px #333;
+	-webkit-box-shadow: 1px 1px 12px #333;
+}
+.selected {
+  color: #369;
+  background-color: lightgreen;
+  font-weight: bold;
+}
+
+/** ------------------------------------------------
+                    text style
+    ------------------------------------------------ **/
+a {
+  color: rgb(102, 152, 255);
+  text-decoration: none;
+  text-shadow: 0px 0px 1px rgb(102, 152, 255);
+}
+a:hover { color: rgb(65, 164, 105); }
+
+
+h1 {
+  font-family: 'Candara';
+  font-size: 20px;
+}
+h1 > a { color: #666; }
+
+h2, h3 {
+  font-family: 'FontinPro';
+  font-weight: normal;
+}
+
+
+
+/** ------------------------------------------------
+                      footer
+    ------------------------------------------------ **/
+footer {
+  margin-top: 40px;
+  border-top: 2px solid #666;
+  clear: both;
+  color:#555753;
+  text-align:left;
+}
+footer .about, footer .contact {
+  float: left;
+  width:470px;
+  font-size: 0.8em;
+}
+footer .contact {
+  text-align: right;
+}
+
+
+
+/** ------------------------------------------------
+                     code scheme
+    ------------------------------------------------ **/
+/* desert scheme ported from vim to google prettify */
+pre.prettyprint { display: block; background-color: #444; overflow-x: auto; padding: 5px; text-align: left; }
+pre.prettyprint .nocode { background-color: none; color: #eee }
+pre.prettyprint .str { color: #ffa0a0 } /* string  - pink */
+pre.prettyprint .kwd { color: #f0e68c; font-weight: bold }
+pre.prettyprint .com { color: #87ceeb } /* comment - skyblue */
+pre.prettyprint .typ { color: #98fb98 } /* type    - lightgreen */
+pre.prettyprint .lit { color: #cd5c5c } /* literal - darkred */
+pre.prettyprint .pun { color: #fff }    /* punctuation */
+pre.prettyprint .pln { color: #fff }    /* plaintext */
+pre.prettyprint .tag { color: #f0e68c; font-weight: bold } /* html/xml tag    - lightyellow */
+pre.prettyprint .atn { color: #bdb76b; font-weight: bold } /* attribute name  - khaki */
+pre.prettyprint .atv { color: #ffa0a0 } /* attribute value - pink */
+pre.prettyprint .dec { color: #98fb98 } /* decimal         - lightgreen */
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums { margin-top: 0; margin-bottom: 0; color: #AEAEAE } /* IE indents via margin-left */
+li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
+/* Alternate shading for lines */
+li.L1,li.L3,li.L5,li.L7,li.L9 { }
+
+
+img[alt='Alexandre Grison'] { width: 600px; margin-left: 175px;  }
+
+/**
+
+**/
+#backgroundPopup{
+display:none;
+position:fixed;
+_position:absolute; /* hack for internet explorer 6*/
+height:100%;
+width:100%;
+top:0;
+left:0;
+background:#000000;
+border:1px solid #cecece;
+z-index:1;
+}
+.popup {
+display:none;
+position:fixed;
+_position:absolute; /* hack for internet explorer 6*/
+height:484px;
+width:708px;
+overflow-y: auto;
+text-rendering: optimizeLegibility;
+background: #111 url('../images/bgpattern.png') top left;
+-moz-border-radius: 10px;
+-khtml-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+color: #dfdfdf;
+border:2px solid #000;
+z-index:2;
+padding:12px;
+font-size: 0.85em;
+}

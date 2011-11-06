@@ -1,0 +1,11 @@
+---
+  title: Hello
+  layout: main
+  description: Welcome note.
+---
+
+Hello
+==============
+
+<img src="/media/images/hellocat.jpg" alt="Hello" />
+<p class="center">More is coming...</p>
