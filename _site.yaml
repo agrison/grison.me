@@ -16,7 +16,12 @@ handlers:
 - url: '/projects'
   static_files: 'projects/index.html'
   upload: '.*'
-  
+
+# css, images and js
+- url: '/media/(.*)'
+  static_files: 'media/\1'
+  upload: '.*'
+    
 # blog article: /2011/10/Something(/)
 - url: '/(.*?)/(.*?)/(.*?)/?'
   static_files: '\1/\2\/3/index.html'
@@ -28,9 +33,4 @@ handlers:
   upload: '.*'
 - url: '/([^/]+)'
   static_files: '\1'
-  upload: '.*'
-  
-# css, images and js
-- url: '/media/(.*)'
-  static_files: 'media/\1'
   upload: '.*'
