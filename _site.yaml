@@ -23,8 +23,8 @@ handlers:
   upload: '.*'
     
 # blog article: /2011/10/Something(/)
-- url: '/(.*?)/(.*?)/(.*?)/?'
-  static_files: '\1/\2\/3/index.html'
+- url: '/([0-9]+)/([0-9]+)/(.*?)/?'
+  static_files: '\1/\2\/\3/index.html'
   upload: '.*'
   
 # special categories/tags
