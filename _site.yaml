@@ -23,7 +23,7 @@ handlers:
   upload: '.*'
   
 # special categories/tags
-- url: '/(.*)/(.*)/?'
+- url: '/(.*?)/(.*?)/?'
   static_files: '\1/\2/index.html'
   upload: '.*'
 - url: '/([^/]+)'
