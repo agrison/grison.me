@@ -224,7 +224,46 @@ img[alt='Hello'] {
 }
 .center { display: block; margin: 0 auto; text-align: center; }
 
+p code {
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #FFFFCC;
+  border-bottom-color: #CCC;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-left-color: #CCC;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: #CCC;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: #CCC;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  color: #52595D;
+  display: inline-block;
+  font-size: 14px;
+  font-family: Monaco, 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+  padding: 3px;
+  white-space: nowrap;
+}
 
+.date {
+  float: left;
+  margin-left: -60px;
+  font-family: 'Nova Script', georgia, serif;
+  font-size: 15px;
+  font-weight: bold;
+  width: 55px;
+  color: #004461;
+  opacity: 0.8;
+  text-align: center;
+  text-shadow: 0px 0px 30px #E9F5FC;
+}
 
 /** ------------------------------------------------
                    pygments
@@ -239,6 +278,7 @@ img[alt='Hello'] {
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
+  overflow-x: auto;
 }
 .highlight .hll { background-color: #ffffcc }
 .highlight .c { color: #8f5902; font-style: italic } /* Comment */

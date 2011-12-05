@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-      <loc>http://www.grison.me/</loc>
+      <loc>http://www.grison.me/404.html</loc>
       <lastmod>2011-11-06</lastmod>
   </url>
   <url>
@@ -9,8 +9,20 @@
       <lastmod>2011-11-06</lastmod>
   </url>
   <url>
+      <loc>http://www.grison.me/</loc>
+      <lastmod>2011-12-02</lastmod>
+  </url>
+  <url>
       <loc>http://www.grison.me/projects/index.html</loc>
-      <lastmod>2011-11-06</lastmod>
+      <lastmod>2011-12-05</lastmod>
+  </url>
+  <url>
+      <loc>http://www.grison.me/2011/12/Vim-XML-Indent-on-Windows</loc>
+      <lastmod>2011-12-01</lastmod>
+  </url>
+  <url>
+      <loc>http://www.grison.me/2011/11/Unix-Prompt</loc>
+      <lastmod>2011-11-20</lastmod>
   </url>
   <url>
       <loc>http://www.grison.me/2011/10/Hello</loc>
