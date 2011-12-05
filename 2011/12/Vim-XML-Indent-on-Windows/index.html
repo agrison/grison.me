@@ -56,7 +56,7 @@
 
     <span class="kd">static</span> <span class="n">String</span> <span class="nf">formatStdIn</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Throwable</span> <span class="o">{</span>
         <span class="kd">final</span> <span class="n">Document</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">parseStdIn</span><span class="o">();</span>
-        <span class="kd">final</span> <span class="n">OutputFormat</span> <span class="n">format</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OutputFormat</span><span class="o">(</span><span class="n">doc</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">,</span> <span class="kc">true</span><span class="o">)</span> <span class="o">;</span>
+        <span class="kd">final</span> <span class="n">OutputFormat</span> <span class="n">format</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OutputFormat</span><span class="o">(</span><span class="n">doc</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">,</span> <span class="kc">true</span><span class="o">)</span> <span class="o">{</span> <span class="o">{</span> <span class="n">setIndent</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span> <span class="o">}</span> <span class="o">};</span>
         <span class="kd">final</span> <span class="n">Writer</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringWriter</span><span class="o">();</span>
         <span class="k">new</span> <span class="nf">XMLSerializer</span><span class="o">(</span><span class="n">out</span><span class="o">,</span> <span class="n">format</span><span class="o">).</span><span class="na">serialize</span><span class="o">(</span><span class="n">doc</span><span class="o">);</span>
         <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
@@ -70,7 +70,7 @@
 </code></pre>
 </div>
 
-<p>This is no übber-fancy Java, nothing hard to do, nor to understand. It should be possible to enhance it so that it performs better ()</p>
+<p>This is no übber-fancy Java, nothing hard to do, nor to understand. For sure, it is possible to enhance it so that it performs better.</p>
 
 <p>I'm sure you know how to write a <code>.bat</code> file that will launch the Java program <span style="font-size: 20px">&#x263a;</span></p>
 
