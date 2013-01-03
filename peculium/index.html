@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+      <title>grison.me - Peculium</title>
+      <link rel="stylesheet" type="text/css" href="/media/css/style.css" />
+      <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
+      <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+      <script type="text/javascript" src="/media/javascript/slider.js"></script>
+      <script type="text/javascript" src="/media/javascript/main.js"></script>
+      <style type="text/css">
+      .content ul li { letter-spacing: 1px; }
+      .content p { text-align: justify; font-size: 16px; }
+      </style>
+   </head>
+   <body>
+      <nav>
+         <div id="logo">g</div>
+         <h1>
+            <a href="/">@Autowired<br/><span>Geek blog;</span></a><br/>
+            <span class="name">// Alexandre Grison</span>
+         </h1>
+
+         <h2><a href="/">Home</a></h2>
+         <h2>Code</h2>
+         <ul>
+            <li><a href="/jssg">Jssg</a></li>
+            <li><a href="/peculium">Peculium</a></li>
+            <li><a href="/kree">Kree!</a></li>
+            <li><a href="/legacy4j">Legacy4j</a></li>
+            <li><a href="/ocamail">OCamail</a></li>
+         </ul>
+         <h2><a href="/photo">Photography</a></h2>
+         <h2><a href="/ego">Ego</a></h2>
+         <h2>Online</h2>
+         <p id="online">
+            <a href="http://twitter.com/#!/algrison"><img src="/media/images/icons/twitter.png" alt="twitter" /></a>
+            <a href="https://www.facebook.com/alexandre.grison"><img src="/media/images/icons/facebook.png" alt="facebook" /></a>
+            <a href="https://plus.google.com/114681009187194342514/posts"><img src="/media/images/icons/gplus.png" alt="google+" /></a>
+            <br />
+            <a href="http://fr.linkedin.com/pub/alexandre-grison/39/ba6/b56"><img src="/media/images/icons/linkedin.png" alt="linkedin" /></a>
+            <a href="http://github.com/agrison"><img src="/media/images/icons/github.png" alt="github" /></a>
+            <a href="http://www.flickr.com/photos/agrison"><img src="/media/images/icons/flickr.png" alt="flickr" /></a>
+         </p>
+      </nav>
+      <div class="content">
+         
+	<h2>Peculium, simple web app to manage your savings.</h2>
+
+	<p><strong>Peculium</strong> which means <em>savings</em> in Latin, is a simple Web application (work in progress) that can be used locally on your computer to manage personal savings. It is an easy and simple alternative to full applications like <span class="caps">GNU </span>Cash as it does handle just simple stupid things.</p>
+
+
+<ul>
+	<li>Handle banking accounts</li>
+	<li>Graphics and statistics about monthly and yearly savings.</li>
+	<li>Monthly expenses details</li>
+
+</ul>
+	<p>This applications was developed for myself, firstly to replace my Excel document and like always, in order to learn new stuff like <a href="http://angularjs.org" title="">AngularJS</a>, <a href="http://dropwizard.codehale.com" title="">DropWizard</a> and <a href="http://mongodb.org" title="">MongoDB</a>.</p>
+
+	<h2>Installation</h2>
+
+
+<ol>
+	<li>You need at least Java 5 to run the application, it is pretty standard stuff so you may already have it installed on your system.</li>
+	<li>Download the <span class="caps">JAR</span> file on my <a href="http://github.com/agrison/peculium" title="">Github project page</a></li>
+	<li>Put it anywhere you want on your system.</li>
+
+</ol>
+	<h2>Running the application</h2>
+
+	<p>The application is bundled as a simple <span class="caps">JAR</span> file containing the whole needed dependencies, to simplify the installation process. Just run the <code>peculium.jar</code> file, a local web server will be launched on your <a href="http://localhost:6789" title=""><code>localhost</code></a>, and your default browser opened on it. That's it, you're ready to use <strong>peculium</strong>.</p>
+
+	<h2>Configuring the application</h2>
+
+	<p>At first launch <strong>peculium</strong> will show you the configuration screen, so that you will be able to configure</p>
+
+
+<ul>
+	<li>The persons that are actually saving money (you, your husband/wife, or your genius dog)</li>
+	<li>The bank accounts (name, rate, max deposit) of these persons</li>
+	<li>The currency</li>
+
+</ul>
+	<h2>Where are saved my datas?</h2>
+
+	<p>The datas are saved in a locally installed <a href="http://h2database.com" title="">H2DB</a> database file. This file named <code>peculium.h2db</code> is located in the same directory as the <code>peculium.jar</code> file.</p>
+
+	<h2>Screenshots</h2>
+
+	<p>Some screenshots here.</p>
+
+	<h2>Documentation</h2>
+
+	<p>You can take a look at the user documentation on the following <a href="http://grison.me/peculium/doc.html" title="">documentation page</a>.</p>
+
+	<h2>Programming Stuff</h2>
+
+	<p>You can have a detailed explanation about how the application works on the following <a href="http://grison.me/peculium/code.html" title="">technical page</a>.</p>
+
+         <div class="footer">Alexandre Grison &mdash; Generated using <a href="http://www.grison.me/jssg/">Jssg</a></div>      </div>
+   </body>
+</html>

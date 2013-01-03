@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+      <title>grison.me - OCamail</title>
+      <link rel="stylesheet" type="text/css" href="/media/css/style.css" />
+      <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
+      <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+      <script type="text/javascript" src="/media/javascript/slider.js"></script>
+      <script type="text/javascript" src="/media/javascript/main.js"></script>
+      <style type="text/css">
+      .content ul li { letter-spacing: 1px; }
+      .content p { text-align: justify; font-size: 16px; }
+      </style>
+   </head>
+   <body>
+      <nav>
+         <div id="logo">g</div>
+         <h1>
+            <a href="/">@Autowired<br/><span>Geek blog;</span></a><br/>
+            <span class="name">// Alexandre Grison</span>
+         </h1>
+
+         <h2><a href="/">Home</a></h2>
+         <h2>Code</h2>
+         <ul>
+            <li><a href="/jssg">Jssg</a></li>
+            <li><a href="/peculium">Peculium</a></li>
+            <li><a href="/kree">Kree!</a></li>
+            <li><a href="/legacy4j">Legacy4j</a></li>
+            <li><a href="/ocamail">OCamail</a></li>
+         </ul>
+         <h2><a href="/photo">Photography</a></h2>
+         <h2><a href="/ego">Ego</a></h2>
+         <h2>Online</h2>
+         <p id="online">
+            <a href="http://twitter.com/#!/algrison"><img src="/media/images/icons/twitter.png" alt="twitter" /></a>
+            <a href="https://www.facebook.com/alexandre.grison"><img src="/media/images/icons/facebook.png" alt="facebook" /></a>
+            <a href="https://plus.google.com/114681009187194342514/posts"><img src="/media/images/icons/gplus.png" alt="google+" /></a>
+            <br />
+            <a href="http://fr.linkedin.com/pub/alexandre-grison/39/ba6/b56"><img src="/media/images/icons/linkedin.png" alt="linkedin" /></a>
+            <a href="http://github.com/agrison"><img src="/media/images/icons/github.png" alt="github" /></a>
+            <a href="http://www.flickr.com/photos/agrison"><img src="/media/images/icons/flickr.png" alt="flickr" /></a>
+         </p>
+      </nav>
+      <div class="content">
+         
+	<h2>OCamail, simple <span class="caps">SMTP </span>Server written in OCaml</h2>
+
+	<p><code>OCamail</code> is a simple SMTP Server acknowledging all requests it receives. It is written in <a href="http://caml.inria.fr/ocaml/index.fr.html" title="">Objective Caml</a> for development and learning purposes.</p>
+
+	<p>Attachments (non-gziped only) are supported and can be saved in a directory in order to be checked if needed.</p>
+
+	<p>OCamail is useful for any local development that makes uses of <span class="caps">SMTP</span>. But for real needs you may prefer using <a href="http://smtp4dev.codeplex.com/" title="">smtp4dev</a> which does the same, and even even more (at least on Windows).</p>
+
+	<p>The code can be found below, it contains three modules for</p>
+
+<ul>
+	<li>String Utilities and parsing of <span class="caps">SMTP</span> commands</li>
+	<li>Base64 decoding</li>
+	<li><span class="caps">SMTP</span> handling</li>
+
+</ul>
+	<h3>Sample session</h3>
+
+	<p><pre class="highlight bash"><span class="nv">$ </span>ocaml ocamail.ml
+OCaMail - Binding on 0.0.0.0:25.
+OCaMail - Waiting <span class="k">for </span>client.
+Responding <span class="o">[</span>220 CaMail - Simple Fake SMTP Server - Ready<span class="o">]</span>
+&gt; ehlo grisonal.aris-lux.lan
+Responding <span class="o">[</span>250 OCaMail greets you, whoever you are<span class="o">]</span>
+&gt; mail FROM:&lt;foo@bar.com&gt;
+Responding <span class="o">[</span>250 OK<span class="o">]</span>
+&gt; rcpt TO:&lt;a.grison@gmail.com&gt;
+Responding <span class="o">[</span>250 OK<span class="o">]</span>
+&gt; data
+Responding <span class="o">[</span>354 Start mail input; end with &lt;CRLF&gt;.&lt;CRLF&gt;<span class="o">]</span>
+&gt; Hello world!
+&gt; .
+Responding <span class="o">[</span>250 OK<span class="o">]</span>
+&gt; mail FROM:&lt;foo@bar.com&gt;
+Responding <span class="o">[</span>250 OK<span class="o">]</span>
+&gt; rcpt TO:&lt;a.grison@gmail.com&gt;
+Responding <span class="o">[</span>250 OK<span class="o">]</span>
+&gt; data
+Responding <span class="o">[</span>354 Start mail input; end with &lt;CRLF&gt;.&lt;CRLF&gt;<span class="o">]</span>
+&gt; Content-Type: multipart/mixed; <span class="nv">boundary</span><span class="o">=</span><span class="s2">&quot;===============1632957673==&quot;</span>
+&gt; MIME-Version: 1.0
+&gt;
+&gt; --<span class="o">===============</span><span class="nv">1632957673</span><span class="o">==</span>
+&gt; Content-Type: text/plain; <span class="nv">charset</span><span class="o">=</span><span class="s2">&quot;us-ascii&quot;</span>
+&gt; MIME-Version: 1.0
+&gt; Content-Transfer-Encoding: 7bit
+&gt;
+&gt; Hello
+&gt; --<span class="o">===============</span><span class="nv">1632957673</span><span class="o">==</span>
+&gt; Content-Type: application/octet-stream
+&gt; MIME-Version: 1.0
+&gt; Content-Transfer-Encoding: base64
+&gt;
+&gt; SGVsbG8gSSdtIGp1c3QgYSBzaW1wbGUgYXR0YWNobWVudCB0byB0aGF0IGVtYWlsLgpJZiBldmVy
+&gt; eXRoaW5nIGdvZXMgd2VsbCwgeW91IHNob3VsZCByZXRyaWV2ZSBtZSBpbiB0aGUgT0NhbWFpbCBk
+&gt; <span class="nv">aXJlY3RvcnkuCgpIYXZlIGZ1biE</span><span class="o">=</span>
+&gt; --<span class="o">===============</span><span class="nv">1632957673</span><span class="o">==</span>--
+&gt; .
+Responding <span class="o">[</span>250 OK<span class="o">]</span>
+&gt; quit
+Responding <span class="o">[</span>221 CaMail - Simple Fake SMTP Server - Service closing transmission channel<span class="o">]</span>
+</pre></p>
+
+	<p>The server has been tested easily in Python using the following lines.</p>
+
+	<p><pre class="highlight pycon"><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">smtplib</span><span class="o">,</span> <span class="nn">email</span><span class="o">,</span> <span class="nn">email.mime.application</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="s">'localhost'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="s">'foo@bar.com'</span><span class="p">,</span> <span class="p">[</span><span class="s">'a.grison@gmail.com'</span><span class="p">],</span> <span class="s">'Hello world!'</span><span class="p">)</span>
+<span class="go">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">msg</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">mime</span><span class="o">.</span><span class="n">Multipart</span><span class="o">.</span><span class="n">MIMEMultipart</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">mime</span><span class="o">.</span><span class="n">Text</span><span class="o">.</span><span class="n">MIMEText</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">mime</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">MIMEApplication</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">'attach.txt'</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="s">'foo@bar.com'</span><span class="p">,</span> <span class="p">[</span><span class="s">'a.grison@gmail.com'</span><span class="p">],</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
+<span class="go">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+<span class="go">(221, 'CaMail - Simple Fake SMTP Server - Service closing transmission channel')</span>
+</pre></p>
+
+	<h3>The code</h3>
+
+	<p><pre class="highlight ocaml"><span class="c">(**************************************************)</span>
+<span class="c">(*                    OCaMail                     *)</span>
+<span class="c">(**************************************************)</span>
+<span class="c">(* Documentation generation:                      *)</span>
+<span class="c">(*    ocamldoc -v -html -colorize-code -d doc/    *)</span>
+<span class="c">(*             ocamail.ml                         *)</span>
+<span class="c">(**************************************************)</span>
+
+<span class="c">(** OCaMail debug information *)</span>
+<span class="k">let</span> <span class="n">debug</span> <span class="n">str</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="o">(</span><span class="s2">&quot;OCaMail - &quot;</span> <span class="o">^</span> <span class="n">str</span><span class="o">);;</span>
+
+<span class="c">(** Some String utilities *)</span>
+<span class="k">module</span> <span class="nc">StrUtils</span> <span class="o">=</span>
+<span class="k">struct</span>
+    <span class="c">(** Returns a list containing each line in the given string *)</span>
+    <span class="k">let</span> <span class="n">lines_of</span> <span class="n">str</span> <span class="o">=</span> <span class="nn">Str</span><span class="p">.</span><span class="n">split</span> <span class="o">(</span><span class="nn">Str</span><span class="p">.</span><span class="n">regexp</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">)</span> <span class="n">str</span>
+    <span class="c">(** Return a tuple where [fst] is the key and [snd] is the value in a</span>
+<span class="c">     string expression like [&quot;key: value&quot;] *)</span>
+    <span class="k">let</span> <span class="n">header_parts</span> <span class="n">line</span> <span class="o">=</span>
+        <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="nn">Str</span><span class="p">.</span><span class="n">split</span> <span class="o">(</span><span class="nn">Str</span><span class="p">.</span><span class="n">regexp</span> <span class="s2">&quot;:&quot;</span><span class="o">)</span> <span class="n">line</span> 
+        <span class="k">in</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">hd</span> <span class="n">p</span><span class="o">,</span> <span class="nn">List</span><span class="p">.</span><span class="n">nth</span> <span class="n">p</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="c">(**</span>
+<span class="c">      trim a string by removing [&quot;^[ \t\r\n]+&quot;] and [&quot;[ \t\r\n]+$&quot;] from it.</span>
+<span class="c">      Example [trim &quot;\thello\t \tworld !  \t&quot; == &quot;hello\t \tworld !&quot;]</span>
+<span class="c">    *)</span>
+    <span class="k">let</span> <span class="n">trim</span> <span class="n">str</span> <span class="o">=</span> <span class="nn">Str</span><span class="p">.</span><span class="n">global_replace</span> <span class="o">(</span><span class="nn">Str</span><span class="p">.</span><span class="n">regexp</span> <span class="s2">&quot;^[ </span><span class="se">\t\r\n</span><span class="s2">]+&quot;</span><span class="o">)</span> <span class="s2">&quot;&quot;</span> <span class="o">(</span><span class="nn">Str</span><span class="p">.</span><span class="n">global_replace</span> <span class="o">(</span><span class="nn">Str</span><span class="p">.</span><span class="n">regexp</span> <span class="s2">&quot;[ </span><span class="se">\t\r\n</span><span class="s2">]+$&quot;</span><span class="o">)</span> <span class="s2">&quot;&quot;</span> <span class="n">str</span><span class="o">)</span>
+    <span class="c">(** Returns what is after a colon, in the given line *)</span>
+    <span class="k">let</span> <span class="n">after_colon</span> <span class="n">line</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">hd</span> <span class="o">(</span><span class="nn">List</span><span class="p">.</span><span class="n">rev</span> <span class="o">(</span><span class="nn">Str</span><span class="p">.</span><span class="n">split</span> <span class="o">(</span><span class="nn">Str</span><span class="p">.</span><span class="n">regexp_string</span> <span class="s2">&quot;:&quot;</span><span class="o">)</span> <span class="n">line</span><span class="o">))</span>
+    <span class="c">(** Get the String representation of a char code, even if it exceeds</span>
+<span class="c">     unsigned char limits. Works as C unsigned char casting. *)</span>
+    <span class="k">let</span> <span class="n">safe_char</span> <span class="n">i</span> <span class="o">=</span> <span class="nn">String</span><span class="p">.</span><span class="n">make</span> <span class="mi">1</span> <span class="o">(</span><span class="nn">Char</span><span class="p">.</span><span class="n">chr</span> <span class="o">(</span><span class="n">i</span> <span class="ow">mod</span> <span class="mi">256</span><span class="o">))</span>
+<span class="k">end</span><span class="o">;;</span>
+
+<span class="c">(** Base 64 module supporting base64 string decoding *)</span>
+<span class="k">module</span> <span class="nc">Base64</span> <span class="o">=</span>
+<span class="k">struct</span>
+    <span class="c">(** Translation Table to decode (see: http://base64.sourceforge.net/b64.c) *)</span>
+    <span class="k">let</span> <span class="n">cd64</span> <span class="o">=</span> <span class="s2">&quot;|$$$}rstuvwxyz{$$$$$$$&gt;?@ABCDEFGHIJKLMNOPQRSTUVW$$$$$$XYZ[</span><span class="se">\\</span><span class="s2">]^_`abcdefghijklmnopq&quot;</span><span class="o">;;</span>
+    <span class="c">(** Return a character (safely), like C-unsigned char *)</span>
+    <span class="k">let</span> <span class="n">safe_char</span> <span class="n">i</span> <span class="o">=</span> <span class="nn">Char</span><span class="p">.</span><span class="n">chr</span> <span class="o">(</span><span class="n">i</span> <span class="ow">mod</span> <span class="mi">256</span><span class="o">);;</span>
+    <span class="c">(** Translate the given character using the internal translation table *)</span>
+    <span class="k">let</span> <span class="n">internal_char</span> <span class="n">v</span> <span class="o">=</span>
+        <span class="k">let</span> <span class="n">internal_char2</span> <span class="n">v</span> <span class="c">(*char*)</span> <span class="o">=</span>
+            <span class="k">let</span> <span class="n">cv</span> <span class="o">=</span> <span class="nn">Char</span><span class="p">.</span><span class="n">code</span> <span class="n">v</span> <span class="k">in</span>
+            <span class="k">if</span> <span class="n">cv</span> <span class="o">&lt;</span> <span class="mi">43</span> <span class="ow">or</span> <span class="n">cv</span> <span class="o">&gt;</span> <span class="mi">122</span> <span class="k">then</span> <span class="nn">Char</span><span class="p">.</span><span class="n">chr</span> <span class="mi">0</span>
+            <span class="k">else</span> <span class="nn">String</span><span class="p">.</span><span class="n">get</span> <span class="n">cd64</span> <span class="o">(</span><span class="n">cv</span> <span class="o">-</span> <span class="mi">43</span><span class="o">)</span>
+        <span class="k">in</span> <span class="k">let</span> <span class="n">vv</span> <span class="o">=</span> <span class="n">internal_char2</span> <span class="n">v</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="n">vvv</span> <span class="o">=</span> <span class="k">if</span> <span class="n">vv</span> <span class="o">==</span> <span class="sc">'$'</span> <span class="k">then</span> <span class="mi">0</span>
+                  <span class="k">else</span> <span class="o">(</span><span class="nn">Char</span><span class="p">.</span><span class="n">code</span> <span class="n">vv</span><span class="o">)</span> <span class="o">-</span> <span class="mi">61</span>
+        <span class="k">in</span> <span class="k">if</span> <span class="n">vvv</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span> <span class="nn">Char</span><span class="p">.</span><span class="n">chr</span> <span class="mi">0</span> <span class="k">else</span> <span class="nn">Char</span><span class="p">.</span><span class="n">chr</span> <span class="o">(</span><span class="n">vvv</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="c">(** decode 4 '6-bit' characters into 3 8-bit binary bytes *)</span>
+    <span class="k">let</span> <span class="n">decode_block</span> <span class="n">s</span> <span class="o">=</span>
+        <span class="k">let</span> <span class="n">code</span> <span class="n">s</span> <span class="n">i</span> <span class="o">=</span> <span class="nn">Char</span><span class="p">.</span><span class="n">code</span> <span class="o">(</span><span class="n">internal_char</span> <span class="o">(</span><span class="nn">String</span><span class="p">.</span><span class="n">get</span> <span class="n">s</span> <span class="n">i</span><span class="o">))</span> <span class="k">in</span>
+        <span class="c">(* (in[0] &lt;&lt; 2 | in[1] &gt;&gt; 4) *)</span>
+        <span class="k">let</span> <span class="n">i0</span> <span class="o">=</span> <span class="nn">StrUtils</span><span class="p">.</span><span class="n">safe_char</span> <span class="o">(((</span><span class="n">code</span> <span class="n">s</span> <span class="mi">0</span><span class="o">)</span> <span class="ow">lsl</span> <span class="mi">2</span><span class="o">)</span> <span class="ow">lor</span> <span class="o">((</span><span class="n">code</span> <span class="n">s</span> <span class="mi">1</span><span class="o">)</span> <span class="n">lsr</span> <span class="mi">4</span><span class="o">))</span> <span class="k">in</span>
+        <span class="c">(* (in[1] &lt;&lt; 4 | in[2] &gt;&gt; 2) *)</span>
+        <span class="k">let</span> <span class="n">i1</span> <span class="o">=</span> <span class="nn">StrUtils</span><span class="p">.</span><span class="n">safe_char</span> <span class="o">(((</span><span class="n">code</span> <span class="n">s</span> <span class="mi">1</span><span class="o">)</span> <span class="ow">lsl</span> <span class="mi">4</span><span class="o">)</span> <span class="ow">lor</span> <span class="o">((</span><span class="n">code</span> <span class="n">s</span> <span class="mi">2</span><span class="o">)</span> <span class="n">lsr</span> <span class="mi">2</span><span class="o">))</span> <span class="k">in</span>
+        <span class="c">(* (((in[2] &lt;&lt; 6) &amp; 0xc0) | in[3]) *)</span>
+        <span class="k">let</span> <span class="n">i2</span> <span class="o">=</span> <span class="nn">StrUtils</span><span class="p">.</span><span class="n">safe_char</span> <span class="o">((((</span><span class="n">code</span> <span class="n">s</span> <span class="mi">2</span><span class="o">)</span> <span class="ow">lsl</span> <span class="mi">6</span><span class="o">)</span> <span class="ow">land</span> <span class="mh">0xc0</span><span class="o">)</span> <span class="ow">lor</span> <span class="o">(</span><span class="n">code</span> <span class="n">s</span> <span class="mi">3</span><span class="o">))</span> <span class="k">in</span>
+        <span class="n">i0</span> <span class="o">^</span> <span class="n">i1</span> <span class="o">^</span> <span class="n">i2</span>
+    <span class="c">(**</span>
+<span class="c">      decode a base64 encoded stream discarding padding, line breaks and noise.</span>
+<span class="c">      [decode_string &quot;SGVsbG8gd29ybGQh&quot; == &quot;Hello world!&quot;]</span>
+<span class="c">      *)</span>
+    <span class="k">let</span> <span class="n">decode_string</span> <span class="n">s</span> <span class="o">=</span>
+        <span class="c">(* split in 4 *)</span>
+        <span class="k">let</span> <span class="n">splits</span> <span class="o">=</span> <span class="nn">Str</span><span class="p">.</span><span class="n">full_split</span> <span class="o">(</span><span class="nn">Str</span><span class="p">.</span><span class="n">regexp</span> <span class="s2">&quot;....&quot;</span><span class="o">)</span> <span class="n">s</span> <span class="k">in</span>
+        <span class="c">(* keep only delims *)</span>
+        <span class="k">let</span> <span class="n">eblocks</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="k">match</span> <span class="n">e</span> <span class="k">with</span> <span class="nn">Str</span><span class="p">.</span><span class="nc">Delim</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="nn">Str</span><span class="p">.</span><span class="nc">Text</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">false</span><span class="o">)</span> <span class="n">splits</span> <span class="k">in</span>
+        <span class="c">(* get string out of the Str.Delim type *)</span>
+        <span class="k">let</span> <span class="n">blocks</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="k">match</span> <span class="n">e</span> <span class="k">with</span> <span class="nn">Str</span><span class="p">.</span><span class="nc">Delim</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">b</span> <span class="o">|</span> <span class="nn">Str</span><span class="p">.</span><span class="nc">Text</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">b</span><span class="o">)</span> <span class="n">eblocks</span> <span class="k">in</span>
+        <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="n">decode_block</span> <span class="n">blocks</span>
+    <span class="c">(** save the given base64 representing bin data to the given filename *)</span>
+    <span class="k">let</span> <span class="n">save_b64_bin</span> <span class="n">b64</span> <span class="n">filename</span> <span class="o">=</span>
+        <span class="k">let</span> <span class="n">decoded</span> <span class="o">=</span> <span class="n">decode_string</span> <span class="n">b64</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="n">open_out_bin</span> <span class="n">filename</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="k">rec</span> <span class="n">print_bin</span> <span class="n">l</span> <span class="n">file</span> <span class="o">=</span>
+            <span class="k">match</span> <span class="n">l</span> <span class="k">with</span>
+            <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">print_endline</span> <span class="s2">&quot;saved&quot;</span>
+            <span class="o">|</span> <span class="n">h</span><span class="o">::</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">output_string</span> <span class="n">file</span> <span class="n">h</span><span class="o">;</span> <span class="n">print_bin</span> <span class="n">t</span> <span class="n">file</span>
+        <span class="k">in</span> <span class="n">print_bin</span> <span class="n">decoded</span> <span class="n">file</span><span class="o">;</span>
+                   <span class="n">close_out</span> <span class="n">file</span>
+<span class="k">end</span><span class="o">;;</span>
+
+<span class="c">(** Simple SMTP module for client requests and server responses *)</span>
+<span class="k">module</span> <span class="nc">Smtp</span> <span class="o">=</span>
+<span class="k">struct</span>
+    <span class="c">(** SMTP Client Request Module *)</span>
+    <span class="k">module</span> <span class="nc">Request</span> <span class="o">=</span>
+    <span class="k">struct</span>
+        <span class="c">(** SMTP Client request *)</span>
+        <span class="k">type</span> <span class="n">request</span> <span class="o">=</span> <span class="nc">Helo</span> <span class="c">(*  HELO or EHLO *)</span>
+            <span class="o">|</span> <span class="nc">Mail</span> <span class="k">of</span> <span class="kt">string</span> <span class="c">(* MAIL FROM: .* *)</span>
+            <span class="o">|</span> <span class="nc">Rcpt</span> <span class="k">of</span> <span class="kt">string</span> <span class="c">(* RCPT TO: .* *)</span>
+            <span class="o">|</span> <span class="nc">Data</span> <span class="c">(* Start of DATA *)</span>
+            <span class="o">|</span> <span class="nc">Line</span> <span class="k">of</span> <span class="kt">string</span> <span class="c">(* Anything that represents data *)</span>
+            <span class="o">|</span> <span class="nc">EndOfData</span> <span class="c">(* End of Data, meaning &lt;CRLF&gt;.&lt;CRLF&gt; *)</span>
+            <span class="o">|</span> <span class="nc">Quit</span> <span class="c">(* Quit *)</span>
+        <span class="c">(** Read a line and extract the command from it *)</span>
+        <span class="k">let</span> <span class="n">from_string</span> <span class="n">line</span> <span class="o">=</span>
+            <span class="k">let</span> <span class="n">safe_line</span> <span class="o">=</span> <span class="k">if</span> <span class="nn">String</span><span class="p">.</span><span class="n">length</span> <span class="n">line</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="k">then</span> <span class="n">line</span> <span class="o">^</span> <span class="o">(</span><span class="nn">String</span><span class="p">.</span><span class="n">make</span> <span class="mi">4</span> <span class="sc">' '</span><span class="o">)</span> <span class="k">else</span> <span class="n">line</span> <span class="k">in</span>
+            <span class="k">match</span> <span class="nn">String</span><span class="p">.</span><span class="n">uppercase</span> <span class="o">(</span><span class="nn">String</span><span class="p">.</span><span class="n">sub</span> <span class="n">safe_line</span> <span class="mi">0</span> <span class="mi">4</span><span class="o">)</span> <span class="k">with</span>
+                <span class="o">|</span> <span class="s2">&quot;HELO&quot;</span> <span class="o">|</span> <span class="s2">&quot;EHLO&quot;</span> <span class="o">-&gt;</span> <span class="nc">Helo</span>
+                <span class="o">|</span> <span class="s2">&quot;MAIL&quot;</span> <span class="o">-&gt;</span> <span class="nc">Mail</span> <span class="o">(</span><span class="nn">StrUtils</span><span class="p">.</span><span class="n">after_colon</span> <span class="n">line</span><span class="o">)</span>
+                <span class="o">|</span> <span class="s2">&quot;RCPT&quot;</span> <span class="o">-&gt;</span> <span class="nc">Rcpt</span> <span class="o">(</span><span class="nn">StrUtils</span><span class="p">.</span><span class="n">after_colon</span> <span class="n">line</span><span class="o">)</span>
+                <span class="o">|</span> <span class="s2">&quot;DATA&quot;</span> <span class="o">-&gt;</span> <span class="nc">Data</span>
+                <span class="o">|</span> <span class="s2">&quot;QUIT&quot;</span> <span class="o">-&gt;</span> <span class="nc">Quit</span>
+                <span class="o">|</span> <span class="n">str</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="nn">StrUtils</span><span class="p">.</span><span class="n">trim</span><span class="o">(</span><span class="n">str</span><span class="o">)</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span> <span class="k">then</span> <span class="nc">EndOfData</span> <span class="k">else</span> <span class="nc">Line</span> <span class="n">line</span>
+    <span class="k">end</span>
+
+    <span class="c">(** SMTP Response to client *)</span>
+    <span class="k">module</span> <span class="nc">Response</span> <span class="o">=</span>
+    <span class="k">struct</span>
+        <span class="c">(** Respond something on the out channel *)</span>
+        <span class="k">let</span> <span class="n">respond</span> <span class="n">out</span> <span class="n">str</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="o">(</span><span class="s2">&quot;Responding [&quot;</span> <span class="o">^</span> <span class="n">str</span> <span class="o">^</span> <span class="s2">&quot;]&quot;</span><span class="o">);</span> <span class="n">output_string</span> <span class="n">out</span> <span class="o">(</span><span class="n">str</span> <span class="o">^</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="o">);</span> <span class="n">flush</span> <span class="n">out</span>
+        <span class="c">(** Transmission start, say who we are *)</span>
+        <span class="k">let</span> <span class="n">ocamail</span> <span class="n">out</span> <span class="o">=</span> <span class="n">respond</span> <span class="n">out</span> <span class="s2">&quot;220 OCaMail - Simple Fake SMTP Server - Ready&quot;</span>
+        <span class="c">(** Say hi to the user requesting HELO *)</span>
+        <span class="k">let</span> <span class="n">hi</span> <span class="n">out</span> <span class="o">=</span> <span class="n">respond</span> <span class="n">out</span> <span class="s2">&quot;250 OCaMail greets you, whoever you are&quot;</span>
+        <span class="c">(** Say OK *)</span>
+        <span class="k">let</span> <span class="n">ok</span> <span class="n">out</span> <span class="o">=</span> <span class="n">respond</span> <span class="n">out</span> <span class="s2">&quot;250 OK&quot;</span>
+        <span class="c">(** Say to client he should start sending data *)</span>
+        <span class="k">let</span> <span class="n">start_data</span> <span class="n">out</span> <span class="o">=</span> <span class="n">respond</span> <span class="n">out</span> <span class="s2">&quot;354 Start mail input; end with &lt;CRLF&gt;.&lt;CRLF&gt;&quot;</span>
+        <span class="c">(** Say good bye to client *)</span>
+        <span class="k">let</span> <span class="n">bye</span> <span class="n">out</span> <span class="o">=</span> <span class="n">respond</span> <span class="n">out</span> <span class="s2">&quot;221 OCaMail - Simple Fake SMTP Server - Service closing transmission channel&quot;</span>
+    <span class="k">end</span>
+
+    <span class="c">(** Data parsing module *)</span>
+    <span class="k">module</span> <span class="nc">Data</span> <span class="o">=</span>
+    <span class="k">struct</span>
+        <span class="c">(** Parse the headers and put the key,value found in the given [Hashtbl] *)</span>
+        <span class="k">let</span> <span class="n">parse_headers</span> <span class="n">headers</span> <span class="n">htbl</span> <span class="o">=</span>
+            <span class="k">let</span> <span class="n">keep_until_nl</span> <span class="n">l</span> <span class="o">=</span> <span class="c">(* keep items only before new empty line *)</span>
+                <span class="k">let</span> <span class="k">rec</span> <span class="n">internal</span> <span class="n">l</span> <span class="n">accu</span> <span class="o">=</span> <span class="k">match</span> <span class="n">l</span> <span class="k">with</span>
+                <span class="o">|</span> <span class="n">h</span><span class="o">::</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="nn">StrUtils</span><span class="p">.</span><span class="n">trim</span><span class="o">(</span><span class="n">h</span><span class="o">)</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="k">then</span> <span class="n">accu</span> <span class="k">else</span> <span class="n">h</span><span class="o">::(</span><span class="n">internal</span> <span class="n">t</span> <span class="n">accu</span><span class="o">)</span>
+                <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="n">accu</span>
+                <span class="k">in</span> <span class="n">internal</span> <span class="n">l</span> <span class="bp">[]</span>
+            <span class="k">in</span>
+            <span class="k">let</span> <span class="n">lines</span> <span class="o">=</span> <span class="n">keep_until_nl</span> <span class="o">(</span><span class="nn">StrUtils</span><span class="p">.</span><span class="n">lines_of</span> <span class="n">headers</span><span class="o">)</span> <span class="k">in</span> <span class="c">(* get lines *)</span>
+            <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="k">let</span> <span class="n">p</span> <span class="o">=</span> <span class="nn">StrUtils</span><span class="p">.</span><span class="n">header_parts</span> <span class="n">e</span> <span class="k">in</span> <span class="nn">Hashtbl</span><span class="p">.</span><span class="n">add</span> <span class="n">htbl</span> <span class="o">(</span><span class="n">fst</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">snd</span> <span class="n">p</span><span class="o">))</span>
+                         <span class="o">(</span><span class="n">keep_until_nl</span> <span class="n">lines</span><span class="o">)</span>
+        <span class="c">(** Get the headers from the given content string [content] *)</span>
+        <span class="k">let</span> <span class="n">get_headers</span> <span class="n">content</span> <span class="o">=</span>
+            <span class="k">let</span> <span class="n">htbl</span> <span class="o">=</span> <span class="nn">Hashtbl</span><span class="p">.</span><span class="n">create</span> <span class="mi">10</span> <span class="k">in</span>
+            <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">parse_headers</span> <span class="n">content</span> <span class="n">htbl</span>
+            <span class="k">in</span> <span class="n">htbl</span>
+        <span class="c">(** Check if the line [s] indicate a multipart/mixed content *)</span>
+        <span class="k">let</span> <span class="n">is_multipart</span> <span class="n">s</span> <span class="o">=</span> <span class="nn">Str</span><span class="p">.</span><span class="n">string_match</span> <span class="o">(</span><span class="nn">Str</span><span class="p">.</span><span class="n">regexp</span> <span class="s2">&quot;.*multipart/mixed.*&quot;</span><span class="o">)</span> <span class="n">s</span> <span class="mi">0</span>
+        <span class="c">(** Get the boundary from the multipart line [s] *)</span>
+        <span class="k">let</span> <span class="n">get_boundary</span> <span class="n">s</span> <span class="o">=</span>
+            <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">Str</span><span class="p">.</span><span class="n">string_match</span> <span class="o">(</span><span class="nn">Str</span><span class="p">.</span><span class="n">regexp</span> <span class="s2">&quot;.*boundary=</span><span class="se">\&quot;\\</span><span class="s2">(.*</span><span class="se">\\</span><span class="s2">)</span><span class="se">\&quot;</span><span class="s2">.*&quot;</span><span class="o">)</span> <span class="n">s</span> <span class="mi">0</span>
+            <span class="k">in</span> <span class="nn">Str</span><span class="p">.</span><span class="n">matched_group</span> <span class="mi">1</span> <span class="n">s</span>
+        <span class="c">(** Extract the data for the given boundary [b] from the given content [s] *)</span>
+        <span class="k">let</span> <span class="n">get_content_for_boundary</span> <span class="n">s</span> <span class="n">b</span> <span class="o">=</span>
+            <span class="k">let</span> <span class="n">lines</span> <span class="o">=</span> <span class="nn">StrUtils</span><span class="p">.</span><span class="n">lines_of</span> <span class="n">s</span> <span class="k">in</span>
+            <span class="k">let</span> <span class="n">content</span> <span class="o">=</span> <span class="n">ref</span> <span class="s2">&quot;&quot;</span> <span class="k">in</span>
+            <span class="k">let</span> <span class="n">started</span> <span class="o">=</span> <span class="n">ref</span> <span class="bp">false</span> <span class="k">in</span>
+            <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">List</span><span class="p">.</span><span class="n">iter</span> <span class="o">(</span><span class="k">fun</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="nn">StrUtils</span><span class="p">.</span><span class="n">trim</span><span class="o">(</span><span class="n">e</span><span class="o">)</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span> <span class="o">^</span> <span class="n">b</span> <span class="k">then</span> <span class="n">started</span> <span class="o">:=</span> <span class="bp">true</span>
+                                        <span class="k">else</span> <span class="k">if</span> <span class="nn">StrUtils</span><span class="p">.</span><span class="n">trim</span><span class="o">(</span><span class="n">e</span><span class="o">)</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span> <span class="o">^</span> <span class="n">b</span> <span class="o">^</span> <span class="s2">&quot;--&quot;</span> <span class="k">then</span> <span class="n">started</span> <span class="o">:=</span> <span class="bp">false</span>
+                                        <span class="k">else</span> <span class="k">if</span> <span class="o">!</span><span class="n">started</span> <span class="k">then</span> <span class="n">content</span> <span class="o">:=</span>
+                                            <span class="o">!</span><span class="n">content</span> <span class="o">^</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">^</span> <span class="n">e</span><span class="o">)</span>
+                              <span class="n">lines</span>
+            <span class="k">in</span> <span class="o">!</span><span class="n">content</span>
+        <span class="c">(** Get the content file name from the [Content-Disposition] header in</span>
+<span class="c">         the given Hashtbl [h] *)</span>
+        <span class="k">let</span> <span class="n">get_content_filename</span> <span class="n">h</span> <span class="o">=</span>
+            <span class="k">let</span> <span class="n">cd</span> <span class="o">=</span> <span class="nn">Hashtbl</span><span class="p">.</span><span class="n">find</span> <span class="n">h</span> <span class="s2">&quot;Content-Disposition&quot;</span> <span class="k">in</span>
+            <span class="k">try</span>
+                <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">Str</span><span class="p">.</span><span class="n">string_match</span> <span class="o">(</span><span class="nn">Str</span><span class="p">.</span><span class="n">regexp</span> <span class="s2">&quot;.*filename=</span><span class="se">\&quot;\\</span><span class="s2">(.*</span><span class="se">\\</span><span class="s2">)</span><span class="se">\&quot;</span><span class="s2">.*&quot;</span><span class="o">)</span> <span class="n">cd</span> <span class="mi">0</span>
+                <span class="k">in</span> <span class="nn">Str</span><span class="p">.</span><span class="n">matched_group</span> <span class="mi">1</span> <span class="n">cd</span>
+            <span class="k">with</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">end</span>
+<span class="k">end</span><span class="o">;;</span>
+
+<span class="k">open</span> <span class="nc">Smtp</span><span class="o">;;</span>
+
+
+<span class="c">(** Establish a server, then run the given function on each connection *)</span>
+<span class="k">let</span> <span class="n">main_server</span> <span class="n">server_fun</span> <span class="o">=</span>
+   <span class="k">let</span> <span class="n">host</span> <span class="o">=</span> <span class="nn">Unix</span><span class="p">.</span><span class="n">inet_addr_of_string</span> <span class="s2">&quot;0.0.0.0&quot;</span> <span class="k">in</span> <span class="c">(* localhost *)</span>
+   <span class="k">let</span> <span class="n">addr</span> <span class="o">=</span> <span class="nn">Unix</span><span class="p">.</span><span class="nc">ADDR_INET</span> <span class="o">(</span><span class="n">host</span><span class="o">,</span> <span class="mi">25</span><span class="o">)</span> <span class="k">in</span>
+   <span class="k">let</span> <span class="n">sock</span> <span class="o">=</span> <span class="nn">Unix</span><span class="p">.</span><span class="n">socket</span> <span class="nn">Unix</span><span class="p">.</span><span class="nc">PF_INET</span> <span class="nn">Unix</span><span class="p">.</span><span class="nc">SOCK_STREAM</span> <span class="mi">0</span> <span class="k">in</span>
+   <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="nn">Unix</span><span class="p">.</span><span class="n">setsockopt</span> <span class="n">sock</span> <span class="nn">Unix</span><span class="p">.</span><span class="nc">SO_REUSEADDR</span> <span class="bp">true</span> <span class="k">in</span>
+   <span class="k">try</span>
+      <span class="nn">Unix</span><span class="p">.</span><span class="n">bind</span> <span class="n">sock</span> <span class="n">addr</span> <span class="o">;</span>
+      <span class="nn">Unix</span><span class="p">.</span><span class="n">listen</span> <span class="n">sock</span> <span class="mi">3</span><span class="o">;</span>
+      <span class="n">debug</span> <span class="s2">&quot;Binding on 0.0.0.0:25.&quot;</span><span class="o">;</span>
+      <span class="k">while</span> <span class="bp">true</span> <span class="k">do</span>
+        <span class="n">debug</span> <span class="s2">&quot;Waiting for client.&quot;</span><span class="o">;</span>
+        <span class="k">let</span> <span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">caller</span><span class="o">)</span> <span class="o">=</span> <span class="nn">Unix</span><span class="p">.</span><span class="n">accept</span> <span class="n">sock</span>
+        <span class="k">in</span> <span class="o">(</span>
+            <span class="k">let</span> <span class="n">inchan</span> <span class="o">=</span> <span class="nn">Unix</span><span class="p">.</span><span class="n">in_channel_of_descr</span> <span class="n">s</span>
+            <span class="ow">and</span> <span class="n">outchan</span> <span class="o">=</span> <span class="nn">Unix</span><span class="p">.</span><span class="n">out_channel_of_descr</span> <span class="n">s</span>
+             <span class="k">in</span> <span class="n">server_fun</span> <span class="n">inchan</span> <span class="n">outchan</span> <span class="n">s</span><span class="o">;</span>
+                            <span class="n">close_in</span> <span class="n">inchan</span><span class="o">;</span>
+                        <span class="k">try</span> <span class="n">close_out</span> <span class="n">outchan</span> <span class="k">with</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">()</span><span class="o">;</span> <span class="c">(* dont care *)</span>
+        <span class="o">);</span>
+        <span class="n">debug</span> <span class="s2">&quot;Finished with client.&quot;</span>
+      <span class="k">done</span>
+   <span class="k">with</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="nn">Unix</span><span class="p">.</span><span class="n">close</span> <span class="n">sock</span>
+<span class="o">;;</span>
+
+
+<span class="c">(** SMTP answer to the given request *)</span>
+<span class="k">let</span> <span class="n">smtp_answer_request</span> <span class="n">req</span> <span class="n">ic</span> <span class="n">oc</span> <span class="n">buffer</span> <span class="n">last_state</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">req</span> <span class="k">with</span>
+      <span class="o">|</span> <span class="nn">Request</span><span class="p">.</span><span class="nc">Helo</span> <span class="o">-&gt;</span> <span class="nn">Response</span><span class="p">.</span><span class="n">hi</span> <span class="n">oc</span>
+      <span class="o">|</span> <span class="nn">Request</span><span class="p">.</span><span class="nc">Mail</span> <span class="n">mail</span> <span class="o">-&gt;</span> <span class="nn">Response</span><span class="p">.</span><span class="n">ok</span> <span class="n">oc</span>
+      <span class="o">|</span> <span class="nn">Request</span><span class="p">.</span><span class="nc">Rcpt</span> <span class="n">mail</span> <span class="o">-&gt;</span> <span class="nn">Response</span><span class="p">.</span><span class="n">ok</span> <span class="n">oc</span>
+      <span class="o">|</span> <span class="nn">Request</span><span class="p">.</span><span class="nc">Data</span> <span class="o">-&gt;</span> <span class="nn">Response</span><span class="p">.</span><span class="n">start_data</span> <span class="n">oc</span>
+      <span class="o">|</span> <span class="nn">Request</span><span class="p">.</span><span class="nc">Line</span> <span class="n">line</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> <span class="n">last_state</span> <span class="o">=</span> <span class="nn">Request</span><span class="p">.</span><span class="nc">EndOfData</span> <span class="k">then</span> <span class="nn">Response</span><span class="p">.</span><span class="n">ok</span> <span class="n">oc</span>
+                             <span class="k">else</span> <span class="n">buffer</span> <span class="o">:=</span> <span class="o">!</span><span class="n">buffer</span> <span class="o">^</span> <span class="n">line</span> <span class="o">^</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span>
+      <span class="o">|</span> <span class="nn">Request</span><span class="p">.</span><span class="nc">EndOfData</span> <span class="o">-&gt;</span> <span class="nn">Response</span><span class="p">.</span><span class="n">ok</span> <span class="n">oc</span><span class="o">;</span> <span class="n">buffer</span> <span class="o">:=</span> <span class="o">!</span><span class="n">buffer</span> <span class="o">^</span> <span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span>
+      <span class="o">|</span> <span class="nn">Request</span><span class="p">.</span><span class="nc">Quit</span> <span class="o">-&gt;</span> <span class="bp">()</span>
+<span class="o">;;</span>
+
+<span class="k">let</span> <span class="n">parse_transcript</span> <span class="n">headers</span> <span class="n">content</span> <span class="o">=</span>
+    <span class="n">debug</span> <span class="o">(</span><span class="s2">&quot;&gt;&gt;&gt;&gt; &quot;</span> <span class="o">^</span> <span class="o">(</span><span class="nn">Hashtbl</span><span class="p">.</span><span class="n">find</span> <span class="n">headers</span> <span class="s2">&quot;Content-Type&quot;</span><span class="o">));</span>
+    <span class="k">if</span> <span class="nn">Data</span><span class="p">.</span><span class="n">is_multipart</span> <span class="o">(</span><span class="nn">Hashtbl</span><span class="p">.</span><span class="n">find</span> <span class="n">headers</span> <span class="s2">&quot;Content-Type&quot;</span><span class="o">)</span> <span class="k">then</span> <span class="o">(</span>
+        <span class="k">let</span> <span class="n">boundary</span> <span class="o">=</span> <span class="nn">Data</span><span class="p">.</span><span class="n">get_boundary</span> <span class="o">(</span><span class="nn">Hashtbl</span><span class="p">.</span><span class="n">find</span> <span class="n">headers</span> <span class="s2">&quot;Content-Type&quot;</span><span class="o">)</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">debug</span> <span class="n">boundary</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="n">data</span> <span class="o">=</span> <span class="nn">Data</span><span class="p">.</span><span class="n">get_content_for_boundary</span> <span class="n">content</span> <span class="n">boundary</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">debug</span> <span class="n">data</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="n">data_headers</span> <span class="o">=</span> <span class="nn">Data</span><span class="p">.</span><span class="n">get_headers</span> <span class="n">data</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="n">filename</span> <span class="o">=</span> <span class="nn">Data</span><span class="p">.</span><span class="n">get_content_filename</span> <span class="n">data_headers</span> <span class="k">in</span>
+        <span class="n">debug</span> <span class="o">(</span><span class="s2">&quot;Need to save attachment: &quot;</span> <span class="o">^</span> <span class="n">filename</span><span class="o">)</span>
+    <span class="o">)</span>
+<span class="o">;;</span>
+
+<span class="c">(**</span>
+<span class="c"> * Save to a timestamp-named file.</span>
+<span class="c"> * Example: mail-20110315-172408.txt</span>
+<span class="c"> *)</span>
+<span class="k">let</span> <span class="n">save_as_file</span> <span class="n">str</span> <span class="o">=</span>
+    <span class="k">let</span> <span class="n">now</span> <span class="o">=</span> <span class="nn">Unix</span><span class="p">.</span><span class="n">localtime</span> <span class="o">(</span><span class="nn">Unix</span><span class="p">.</span><span class="n">time</span><span class="bp">()</span><span class="o">)</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="o">{</span> <span class="nn">Unix</span><span class="p">.</span><span class="n">tm_year</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span> <span class="nn">Unix</span><span class="p">.</span><span class="n">tm_mon</span> <span class="o">=</span> <span class="n">m</span><span class="o">;</span> <span class="nn">Unix</span><span class="p">.</span><span class="n">tm_mday</span> <span class="o">=</span> <span class="n">d</span><span class="o">;</span>
+          <span class="nn">Unix</span><span class="p">.</span><span class="n">tm_hour</span> <span class="o">=</span> <span class="n">h</span><span class="o">;</span> <span class="nn">Unix</span><span class="p">.</span><span class="n">tm_min</span> <span class="o">=</span> <span class="n">mm</span><span class="o">;</span> <span class="nn">Unix</span><span class="p">.</span><span class="n">tm_sec</span> <span class="o">=</span> <span class="n">s</span> <span class="o">}</span> <span class="o">=</span> <span class="n">now</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="n">name</span> <span class="o">=</span> <span class="nn">Printf</span><span class="p">.</span><span class="n">sprintf</span> <span class="s2">&quot;mail-%4d%02d%02d-%02d%02d%02d.txt&quot;</span> <span class="o">(</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1900</span><span class="o">)</span> <span class="n">m</span> <span class="n">d</span> <span class="n">h</span> <span class="n">mm</span> <span class="n">s</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="n">headers</span> <span class="o">=</span> <span class="nn">Data</span><span class="p">.</span><span class="n">get_headers</span> <span class="n">str</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">open_out</span> <span class="n">name</span> <span class="k">in</span>
+        <span class="n">output_string</span> <span class="n">channel</span> <span class="n">str</span><span class="o">;</span>
+        <span class="n">close_out</span> <span class="n">channel</span><span class="o">;</span>
+        <span class="n">debug</span> <span class="o">(</span><span class="s2">&quot;saved something into &quot;</span> <span class="o">^</span> <span class="n">name</span><span class="o">);</span>
+        <span class="n">parse_transcript</span> <span class="n">headers</span> <span class="n">str</span>
+<span class="o">;;</span>
+
+<span class="c">(** SMTP service *)</span>
+<span class="k">let</span> <span class="n">smtp_service</span> <span class="n">ic</span> <span class="n">oc</span> <span class="n">client</span> <span class="o">=</span>
+   <span class="k">let</span> <span class="n">content</span> <span class="o">=</span> <span class="n">ref</span> <span class="s2">&quot;&quot;</span> <span class="k">in</span>
+   <span class="k">let</span> <span class="n">state</span> <span class="o">=</span> <span class="n">ref</span> <span class="nn">Request</span><span class="p">.</span><span class="nc">Helo</span> <span class="k">in</span>
+   <span class="k">try</span>
+      <span class="nn">Response</span><span class="p">.</span><span class="n">ocamail</span> <span class="n">oc</span><span class="o">;</span>
+      <span class="k">while</span> <span class="bp">true</span> <span class="k">do</span>
+         <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">input_line</span> <span class="n">ic</span> <span class="k">in</span>
+         <span class="k">let</span> <span class="o">_</span> <span class="o">=</span> <span class="n">print_endline</span> <span class="o">(</span><span class="s2">&quot;&gt; &quot;</span> <span class="o">^</span> <span class="n">s</span><span class="o">)</span> <span class="k">in</span> <span class="c">(* log incoming line *)</span>
+         <span class="k">let</span> <span class="n">request</span> <span class="o">=</span> <span class="nn">Request</span><span class="p">.</span><span class="n">from_string</span> <span class="n">s</span> <span class="k">in</span>
+           <span class="k">match</span> <span class="n">request</span> <span class="k">with</span>
+             <span class="o">|</span> <span class="nn">Request</span><span class="p">.</span><span class="nc">Quit</span> <span class="o">-&gt;</span> <span class="nn">Response</span><span class="p">.</span><span class="n">bye</span> <span class="n">oc</span><span class="o">;</span> <span class="n">save_as_file</span> <span class="o">!</span><span class="n">content</span>
+             <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">smtp_answer_request</span> <span class="n">request</span> <span class="n">ic</span> <span class="n">oc</span> <span class="n">content</span> <span class="o">!</span><span class="n">state</span><span class="o">;</span>
+                    <span class="n">state</span> <span class="o">:=</span> <span class="n">request</span>
+      <span class="k">done</span>
+   <span class="k">with</span> <span class="nc">End_of_file</span> <span class="o">-&gt;</span> <span class="n">debug</span> <span class="s2">&quot;Reading from client finished...&quot;</span>
+<span class="o">;;</span>
+
+
+<span class="c">(** OCaMail *)</span>
+<span class="k">let</span> <span class="k">rec</span> <span class="n">ocamail</span> <span class="bp">()</span> <span class="o">=</span>
+   <span class="k">try</span>
+       <span class="nn">Unix</span><span class="p">.</span><span class="n">handle_unix_error</span> <span class="n">main_server</span> <span class="n">smtp_service</span>
+   <span class="k">with</span>
+     <span class="o">|</span> <span class="nc">Sys_error</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="n">debug</span> <span class="o">(</span><span class="s2">&quot;Failed with Sys_error: &quot;</span> <span class="o">^</span> <span class="n">x</span><span class="o">);</span> <span class="n">ocamail</span><span class="bp">()</span> <span class="c">(* try a restart *)</span>
+     <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">debug</span> <span class="s2">&quot;OCaMail stopping. See ya !&quot;</span><span class="o">;</span> <span class="n">exit</span> <span class="mi">0</span>
+<span class="o">;;</span>
+
+<span class="c">(* run the whole stuff *)</span>
+<span class="n">ocamail</span><span class="bp">()</span><span class="o">;;</span>
+</pre></p>
+
+         <div class="footer">Alexandre Grison &mdash; Generated using <a href="http://www.grison.me/jssg/">Jssg</a></div>      </div>
+   </body>
+</html>

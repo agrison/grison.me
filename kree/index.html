@@ -2,13 +2,15 @@
 <html>
    <head>
       <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-      <title>grison.me</title>
+      <title>grison.me - Kree!</title>
       <link rel="stylesheet" type="text/css" href="/media/css/style.css" />
       <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
       <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+      <script type="text/javascript" src="/media/javascript/slider.js"></script>
+      <script type="text/javascript" src="/media/javascript/main.js"></script>
       <style type="text/css">
-        .content ul li { font-size: 20px !important; }
-        .content p { text-align: justify; font-size: 16px; }
+      .content ul li { letter-spacing: 1px; }
+      .content p { text-align: justify; font-size: 16px; }
       </style>
    </head>
    <body>
@@ -43,19 +45,32 @@
       </nav>
       <div class="content">
          
-	<h2>Welcome</h2>
+	<h2>Kree!</h2>
 
-	<p>Welcome to my personal web site. My name is Alexandre, <del>often</del> always called <code>Alex</code>. You will find here my blog containing articles about stuff I like and some pages about code I wrote or photographs I took.</p>
-         
-         <h2>Blog posts</h2>
-         <ul>
-            <li><span class="date">Jan 1, 2013</span> &mdash; <a href="/blog/2013/01/01/New-Year-Resolutions">New year resolutions</a></li>
-            <li><span class="date">Dec 19, 2012</span> &mdash; <a href="/blog/2012/12/19/Website-Update">Website update, using Jssg</a></li>
-            <li><span class="date">Dec 7, 2011</span> &mdash; <a href="/blog/2011/12/07/Did-You-Mean">Peter Norvig's Did You Mean</a></li>
-            <li><span class="date">Dec 1, 2011</span> &mdash; <a href="/blog/2011/12/01/Vim-XML-Indent-on-Windows">Vim XML Indent on Windows</a></li>
-            <li><span class="date">Nov 20, 2011</span> &mdash; <a href="/blog/2011/11/20/Unix-Prompt">Unix Prompt, White Input Line and Solarized</a></li>
-            <li><span class="date">Oct 29, 2011</span> &mdash; <a href="/blog/2011/10/29/Hello">Hello</a></li>
-         </ul>
+	<p>Kree is a minimalistic Eclipse plugin to show an indentation guide in text files. It aims firstly at Java code, or C-brace-style code, but it should work for any language clearly indented (Python, Ruby, you name it).</p>
+
+	<p>It has been a long time since I first read on eclipse forums that a small feature like this is planned, but it isn&#8216;t out yet. That&#8216;s why I made this plugin, in order to learn the Eclipse plugin development process and because sometimes it can be useful to see clearly the indentation through the code.</p>
+
+	<h3>Screenshot</h3>
+
+	<p><img src="/media/images/kree/screenshot.png" alt="Kree! in action" /></p>
+
+	<h3>About the name</h3>
+
+	<p>I like the Stargate universe a lot, I needed a name, here it is. Kree means a lot of things in Goa&#8216;uld, since it&#8216;s a fictionnal language, it could even means Show me the indentation, you Sholva.</p>
+
+	<h3>Todos</h3>
+
+
+<ul>
+	<li>Preference pane for setting guide colors (cycle)</li>
+	<li>Highlighting parens with different colors (if = green, else = blue, ...; ala CodeKana)</li>
+	<li>More features, less bugs.</li>
+
+</ul>
+	<h3>License</h3>
+
+	<p>Distributed under the Eclipse Public License.</p>
 
          <div class="footer">Alexandre Grison &mdash; Generated using <a href="http://www.grison.me/jssg/">Jssg</a></div>      </div>
    </body>

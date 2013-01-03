@@ -2,13 +2,15 @@
 <html>
    <head>
       <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-      <title>grison.me</title>
+      <title>Hello</title>
       <link rel="stylesheet" type="text/css" href="/media/css/style.css" />
       <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
       <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+      <script type="text/javascript" src="/media/javascript/slider.js"></script>
+      <script type="text/javascript" src="/media/javascript/main.js"></script>
       <style type="text/css">
-        .content ul li { font-size: 20px !important; }
-        .content p { text-align: justify; font-size: 16px; }
+      .content ul li { letter-spacing: 1px; }
+      .content p { text-align: justify; font-size: 16px; }
       </style>
    </head>
    <body>
@@ -42,21 +44,29 @@
          </p>
       </nav>
       <div class="content">
-         
-	<h2>Welcome</h2>
+        <span class="post-date" style="float: right">Oct 29, 2011</span>
+         <h1 id="hello">Hello</h1>
 
-	<p>Welcome to my personal web site. My name is Alexandre, <del>often</del> always called <code>Alex</code>. You will find here my blog containing articles about stuff I like and some pages about code I wrote or photographs I took.</p>
-         
-         <h2>Blog posts</h2>
-         <ul>
-            <li><span class="date">Jan 1, 2013</span> &mdash; <a href="/blog/2013/01/01/New-Year-Resolutions">New year resolutions</a></li>
-            <li><span class="date">Dec 19, 2012</span> &mdash; <a href="/blog/2012/12/19/Website-Update">Website update, using Jssg</a></li>
-            <li><span class="date">Dec 7, 2011</span> &mdash; <a href="/blog/2011/12/07/Did-You-Mean">Peter Norvig's Did You Mean</a></li>
-            <li><span class="date">Dec 1, 2011</span> &mdash; <a href="/blog/2011/12/01/Vim-XML-Indent-on-Windows">Vim XML Indent on Windows</a></li>
-            <li><span class="date">Nov 20, 2011</span> &mdash; <a href="/blog/2011/11/20/Unix-Prompt">Unix Prompt, White Input Line and Solarized</a></li>
-            <li><span class="date">Oct 29, 2011</span> &mdash; <a href="/blog/2011/10/29/Hello">Hello</a></li>
-         </ul>
+<p><img src="/media/images/hellocat.jpg" alt="Hello" /></p>
 
+<p class="center">More is coming...</p>
+
+
+      <div id="comments">
+          <div id="disqus_thread"></div>
+          <script type="text/javascript">
+              var disqus_shortname = 'grison';
+              var disqus_identifier = '/blog/Hello';
+              var disqus_url = 'http://www.grison.me/blog/2011/10/29/Hello';
+              var disqus_developer = 1;
+              (function() {
+                  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
          <div class="footer">Alexandre Grison &mdash; Generated using <a href="http://www.grison.me/jssg/">Jssg</a></div>      </div>
    </body>
 </html>

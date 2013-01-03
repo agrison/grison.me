@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+      <title>Unix Prompt, White Input Line and Solarized</title>
+      <link rel="stylesheet" type="text/css" href="/media/css/style.css" />
+      <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
+      <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+      <script type="text/javascript" src="/media/javascript/slider.js"></script>
+      <script type="text/javascript" src="/media/javascript/main.js"></script>
+      <style type="text/css">
+      .content ul li { letter-spacing: 1px; }
+      .content p { text-align: justify; font-size: 16px; }
+      </style>
+   </head>
+   <body>
+      <nav>
+         <div id="logo">g</div>
+         <h1>
+            <a href="/">@Autowired<br/><span>Geek blog;</span></a><br/>
+            <span class="name">// Alexandre Grison</span>
+         </h1>
+
+         <h2><a href="/">Home</a></h2>
+         <h2>Code</h2>
+         <ul>
+            <li><a href="/jssg">Jssg</a></li>
+            <li><a href="/peculium">Peculium</a></li>
+            <li><a href="/kree">Kree!</a></li>
+            <li><a href="/legacy4j">Legacy4j</a></li>
+            <li><a href="/ocamail">OCamail</a></li>
+         </ul>
+         <h2><a href="/photo">Photography</a></h2>
+         <h2><a href="/ego">Ego</a></h2>
+         <h2>Online</h2>
+         <p id="online">
+            <a href="http://twitter.com/#!/algrison"><img src="/media/images/icons/twitter.png" alt="twitter" /></a>
+            <a href="https://www.facebook.com/alexandre.grison"><img src="/media/images/icons/facebook.png" alt="facebook" /></a>
+            <a href="https://plus.google.com/114681009187194342514/posts"><img src="/media/images/icons/gplus.png" alt="google+" /></a>
+            <br />
+            <a href="http://fr.linkedin.com/pub/alexandre-grison/39/ba6/b56"><img src="/media/images/icons/linkedin.png" alt="linkedin" /></a>
+            <a href="http://github.com/agrison"><img src="/media/images/icons/github.png" alt="github" /></a>
+            <a href="http://www.flickr.com/photos/agrison"><img src="/media/images/icons/flickr.png" alt="flickr" /></a>
+         </p>
+      </nav>
+      <div class="content">
+        <span class="post-date" style="float: right">Nov 20, 2011</span>
+         <h1 id="unix-prompt">Unix Prompt</h1>
+
+<p>Arriving at my new working place, I wanted to install my own <code>.bashrc</code> and other <code>dotfiles</code>, like I had on my previous work station.</p>
+
+<p>But this time, I wanted a distinguishable prompt with nice colors and still easy for the eyes. So I decided to go on with the <a href="http://ethanschoonover.com/solarized">Solarized</a> theme and installed it for PuTTY, Vim and other tools I use on a daily basis.</p>
+
+<p>The next little challenge for me was to clearly differenciate the command line in my prompt (the things I type) with another color than the output that gets generated. After a few research on the net, I've found a solution that works pretty well.</p>
+
+<p>I'm using bash, and here is a screen of PuTTY on my Windows 7 work station:</p>
+
+<p align="center"><img src="/media/images/putty.png" alt="PuTTY with Unix Prompt" /></p>
+
+<p>The solution was to use thre <code>trap</code> command to reset the colors before the shell outputs something, and let the color in white at the end of <code>PS1</code>.</p>
+
+<p>Here is an excerpt of my <code>.bashrc</code>
+<pre class="highlight bash"><span class="c"># Reset</span>
+<span class="nv">Color_Off</span><span class="o">=</span><span class="s1">'\[\e[0m\]'</span>       <span class="c"># Text Reset</span>
+
+<span class="c"># Colors will work nice when used with &quot;Solarized&quot; palette.</span>
+<span class="c"># Nothing new here</span>
+<span class="nv">White</span><span class="o">=</span><span class="s1">'\[\e[0;37m\]'</span>        <span class="c"># White</span>
+<span class="nv">BPurple</span><span class="o">=</span><span class="s1">'\[\e[1;35m\]'</span>      <span class="c"># Purple</span>
+<span class="nv">Green</span><span class="o">=</span><span class="s1">'\[\e[0;32m\]'</span>        <span class="c"># Green</span>
+<span class="nv">Blue</span><span class="o">=</span><span class="s1">'\[\e[0;34m\]'</span>         <span class="c"># Blue</span>
+<span class="nv">Yellow</span><span class="o">=</span><span class="s1">'\[\e[0;33m\]'</span>       <span class="c"># Yellow</span>
+<span class="nv">Purple</span><span class="o">=</span><span class="s1">'\[\e[0;35m\]'</span>       <span class="c"># Purple</span>
+<span class="nv">BWhite</span><span class="o">=</span><span class="s1">'\[\e[1;37m\]'</span>       <span class="c"># White</span>
+
+<span class="c"># custom prompt. </span>
+<span class="c"># User input is colored in white</span>
+<span class="c"># the trap will reset the colors before execution of commands</span>
+<span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;${BPurple}\A ${Green}\u${Color_Off}@${Blue}\h${Color_Off}:[${Yellow}\w${Color_Off}]${Purple}\n$ ${BWhite}&quot;</span>
+
+<span class="c"># reset color after prompt</span>
+<span class="nb">trap</span> <span class="s2">&quot;echo -ne '\e[0m'&quot;</span> DEBUG
+</pre></p>
+
+<p>The <code>trap</code> command will execute <code>echo -ne '\e[Om'</code> before anything gets written on stdout, and thus will reset the color that was previously left to white. This is the only real trick in this post. Nevertheless, it's still pretty cool.</p>
+
+<p>Enjoy your nice prompt <span style="font-size: 24px">&#x263a;</span></p>
+
+
+      <div id="comments">
+          <div id="disqus_thread"></div>
+          <script type="text/javascript">
+              var disqus_shortname = 'grison';
+              var disqus_identifier = '/blog/Unix Prompt, White Input Line and Solarized';
+              var disqus_url = 'http://www.grison.me/blog/2011/11/20/Unix-Prompt';
+              var disqus_developer = 1;
+              (function() {
+                  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+         <div class="footer">Alexandre Grison &mdash; Generated using <a href="http://www.grison.me/jssg/">Jssg</a></div>      </div>
+   </body>
+</html>

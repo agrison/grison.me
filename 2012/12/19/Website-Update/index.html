@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+      <title>Website update, using Jssg</title>
+      <link rel="stylesheet" type="text/css" href="/media/css/style.css" />
+      <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
+      <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+      <script type="text/javascript" src="/media/javascript/slider.js"></script>
+      <script type="text/javascript" src="/media/javascript/main.js"></script>
+      <style type="text/css">
+      .content ul li { letter-spacing: 1px; }
+      .content p { text-align: justify; font-size: 16px; }
+      </style>
+   </head>
+   <body>
+      <nav>
+         <div id="logo">g</div>
+         <h1>
+            <a href="/">@Autowired<br/><span>Geek blog;</span></a><br/>
+            <span class="name">// Alexandre Grison</span>
+         </h1>
+
+         <h2><a href="/">Home</a></h2>
+         <h2>Code</h2>
+         <ul>
+            <li><a href="/jssg">Jssg</a></li>
+            <li><a href="/peculium">Peculium</a></li>
+            <li><a href="/kree">Kree!</a></li>
+            <li><a href="/legacy4j">Legacy4j</a></li>
+            <li><a href="/ocamail">OCamail</a></li>
+         </ul>
+         <h2><a href="/photo">Photography</a></h2>
+         <h2><a href="/ego">Ego</a></h2>
+         <h2>Online</h2>
+         <p id="online">
+            <a href="http://twitter.com/#!/algrison"><img src="/media/images/icons/twitter.png" alt="twitter" /></a>
+            <a href="https://www.facebook.com/alexandre.grison"><img src="/media/images/icons/facebook.png" alt="facebook" /></a>
+            <a href="https://plus.google.com/114681009187194342514/posts"><img src="/media/images/icons/gplus.png" alt="google+" /></a>
+            <br />
+            <a href="http://fr.linkedin.com/pub/alexandre-grison/39/ba6/b56"><img src="/media/images/icons/linkedin.png" alt="linkedin" /></a>
+            <a href="http://github.com/agrison"><img src="/media/images/icons/github.png" alt="github" /></a>
+            <a href="http://www.flickr.com/photos/agrison"><img src="/media/images/icons/flickr.png" alt="flickr" /></a>
+         </p>
+      </nav>
+      <div class="content">
+        <span class="post-date" style="float: right">Dec 19, 2012</span>
+         
+	<h2>Website update, using Jssg</h2>
+
+	<p>You are seeing the new design of this site, and I wanted to talk a little bit about it, so let&#8216;s get started.</p>
+
+	<p>It has been years since I did not touched this site, and I wanted to refresh it in some way. The previous web site was using Jekyll as a static site generator. While I wanted to refresh the visual aspects I quickly checked about Jekyll alternatives. What I could not found was a Jekyll-like application written in Java, so the questions were <em>why</em> and <em>why wouldn't I create one</em></p>
+
+	<h3>Visual aspect</h3>
+
+	<p>I wanted to make the site minimalist, simply because I&#8216;m no designer. This is true, I can&#8216;t make something beautiful with images and just plain <code>CSS</code>, so I kept it simple. A light gray background-color. Some shades of darker grays, a little touch of green. That&#8216;s it.</p>
+
+	<p>The site is two column, and I hope it&#8216;s legible on mobiles, I did my best for it, but eventually, it will depends on the content being served. Don&#8216;t hesitate to tell me if it does not work correctly <em>(I was asking myself about using something like Foundation)</em></p>
+
+	<p>I think that the user experience should be good, focus is on the content, which will encourage me to write something better and maybe more often than before.</p>
+
+	<h3>Ease of update</h3>
+
+	<p>Updating this site should not be a pain, it should be easy as <code>jssg build</code> and <code>git push</code>. This site is hosted on Google App Engine, the pages are being fetched from Github and my domain is just pointing on Google App Engine.</p>
+
+	<h2>Making the site with Jssg</h2>
+
+	<p>Like I said, I did not found a Jekyll-like application written in Java <em>(correct me if I'm wrong)</em> so I did wrote one. It has the same philosophy as Jekyll, but this is not a port.</p>
+
+	<p>I created a specific page for the <a href="http://grison.me/jssg" title="">Jssg project</a> on this site if you need to know more details, but here is how the site is being build with that tool.</p>
+
+	<h3>Directories</h3>
+
+The site is architectured in the following way:
+<pre>
++ _build/
++ _layout/
+|--+ index.html
+|--+ main.html
+|--+ nav.html
+|--+ footer.html
++ _posts/
+|--+ 2011-10-29-Hello.markdown
+|--+ 2011-11-20-Unix-Prompt.markdown
+|  ...
++ media/
+|--+ css/
+|--+ images/
+|--+ javascript/
++ ego.textile
++ index.textile
+...
+</pre>
+
+	<p>Invoking <code>jssg build</code> will build the website by doing specific tasks</p>
+
+	<p><ul style="padding: 0"><br>
+<li>Scan the <code>_posts/</code> directory for each file having the pattern <code>yyyy-MM-dd-.something.(markdown|textile)</code><br>
+<ul><li>Detect code snippets (if any)</li><br>
+<li>Generate the <code>HTML</code> markup equivalent for the <code>Markdown</code> or <code>Textile</code> file content</li><br>
+<li>Highlight code snippets with (@Jygments@ / <code>Pygments</code>)</li><br>
+<li>Merge the <code>HTML</code> into the layout found in the <code>_layout/</code> directory using <code>Freemarker</code></li><br>
+<li>Write the whole content in <code>_build/blog/yyyy/MM/dd/something</code></li></ul></li><br>
+<li>Scan the current directory for each file having the <code>mkd|markdown|textile</code> extension<br>
+<ul><li>Do exactly the same as above</li></ul></li><br>
+<li>Copy everything that is in the current directory that has not already been processed into the <code>_build/</code> directory</li><br>
+</ul></p>
+
+	<p>All these tasks are being executed automatically and takes just seconds.</p>
+
+	<p>During development <code>jssg</code> support a specific parameter named <code>serve</code> that will run Jetty (a HTTP Server) on the <code>_build/</code> directory so that the site can be viewed directly. Besides, file are being observed by the <code>jssg</code> process, so that when you edit any <code>Textile</code> or <code>Markdown</code> file it will be reprocessed directly and I just have to refresh the page in my browser to see the change taking effects. It works also for medias like <code>CSS</code>, images and <code>Javascript</code></p>
+
+	<h3>Sample blog post</h3>
+
+	<p>This is the markdown source for the first blog post of this site <a href="http://grison.me/blog/2011/10/29/Hello" title="">Hello</a>.</p>
+
+	<p><pre class="highlight">
+---
+title: Hello
+layout: main
+description: Welcome note.
+comments: true
+date: 2011-10-29
+url: /blog/2011/10/29/Hello
+---
+
+Hello
+==============
+
+![Hello](&quot;/media/images/hellocat.jpg&quot;)
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;center&quot;</span><span class="nt">&gt;</span>More is coming...<span class="nt">&lt;/p&gt;</span>
+</pre></p>
+
+	<h3>Layout using Freemarker</h3>
+
+	<p>The final <code>HTML</code> layout is resolved using <code>Freemarker</code>. <code>Jssg</code> provides <code>Freemarker</code> with context variables about the blog post or site page that is being rendered like the <code>${content}</code> variable for the page content and <code>${posts}</code> for the list of available blog posts.</p>
+
+	<p><pre class="highlight">
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;head</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html;charset=UTF-8&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;title</span><span class="nt">&gt;</span>${header['title']}<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;/media/css/style.css&quot;</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;/head&gt;</span>
+   <span class="nt">&lt;body</span><span class="nt">&gt;</span>
+<span class="err">&lt;</span>#include &quot;nav.html&quot;&gt;
+
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
+         ${content}
+         
+         <span class="nt">&lt;ul</span><span class="nt">&gt;</span>
+         <span class="err">&lt;</span>#assign blogPosts = posts?sort_by(&quot;date&quot;)&gt;
+         <span class="err">&lt;</span>#foreach post in blogPosts?reverse&gt;
+            <span class="nt">&lt;li</span><span class="nt">&gt;</span><span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;date&quot;</span><span class="nt">&gt;</span>${post.date?date?string.medium}<span class="nt">&lt;/span&gt;</span> <span class="ni">&amp;mdash;</span> <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;${post.url}&quot;</span><span class="nt">&gt;</span>${post.title}<span class="nt">&lt;/a&gt;</span><span class="nt">&lt;/li&gt;</span>
+         <span class="err">&lt;</span>/#foreach&gt;
+         <span class="nt">&lt;/ul&gt;</span>
+
+<span class="err">&lt;</span>#include &quot;footer.html&quot;&gt;
+      <span class="nt">&lt;/div&gt;</span>
+   <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></p>
+
+      <div id="comments">
+          <div id="disqus_thread"></div>
+          <script type="text/javascript">
+              var disqus_shortname = 'grison';
+              var disqus_identifier = '/blog/Website update, using Jssg';
+              var disqus_url = 'http://www.grison.me/blog/2012/12/19/Website-Update';
+              var disqus_developer = 1;
+              (function() {
+                  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+         <div class="footer">Alexandre Grison &mdash; Generated using <a href="http://www.grison.me/jssg/">Jssg</a></div>      </div>
+   </body>
+</html>

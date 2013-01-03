@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+      <title>grison.me - Legacy4J</title>
+      <link rel="stylesheet" type="text/css" href="/media/css/style.css" />
+      <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
+      <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+      <script type="text/javascript" src="/media/javascript/slider.js"></script>
+      <script type="text/javascript" src="/media/javascript/main.js"></script>
+      <style type="text/css">
+      .content ul li { letter-spacing: 1px; }
+      .content p { text-align: justify; font-size: 16px; }
+      </style>
+   </head>
+   <body>
+      <nav>
+         <div id="logo">g</div>
+         <h1>
+            <a href="/">@Autowired<br/><span>Geek blog;</span></a><br/>
+            <span class="name">// Alexandre Grison</span>
+         </h1>
+
+         <h2><a href="/">Home</a></h2>
+         <h2>Code</h2>
+         <ul>
+            <li><a href="/jssg">Jssg</a></li>
+            <li><a href="/peculium">Peculium</a></li>
+            <li><a href="/kree">Kree!</a></li>
+            <li><a href="/legacy4j">Legacy4j</a></li>
+            <li><a href="/ocamail">OCamail</a></li>
+         </ul>
+         <h2><a href="/photo">Photography</a></h2>
+         <h2><a href="/ego">Ego</a></h2>
+         <h2>Online</h2>
+         <p id="online">
+            <a href="http://twitter.com/#!/algrison"><img src="/media/images/icons/twitter.png" alt="twitter" /></a>
+            <a href="https://www.facebook.com/alexandre.grison"><img src="/media/images/icons/facebook.png" alt="facebook" /></a>
+            <a href="https://plus.google.com/114681009187194342514/posts"><img src="/media/images/icons/gplus.png" alt="google+" /></a>
+            <br />
+            <a href="http://fr.linkedin.com/pub/alexandre-grison/39/ba6/b56"><img src="/media/images/icons/linkedin.png" alt="linkedin" /></a>
+            <a href="http://github.com/agrison"><img src="/media/images/icons/github.png" alt="github" /></a>
+            <a href="http://www.flickr.com/photos/agrison"><img src="/media/images/icons/flickr.png" alt="flickr" /></a>
+         </p>
+      </nav>
+      <div class="content">
+         
+	<h2>Legacy4J, legacy flat files for Java</h2>
+
+	<p>Are you a Java Developer who needs to parse old times <code>legacy</code> flat files? You're bored to write each time a new parser for these files? In this case, you've come to the right page. <strong>Legacy4j</strong> is a small Java library that helps you load fixed length files to <span class="caps">POJ</span>Os and saves them the other way.</p>
+
+	<p>You can get the <strong>legacy4j</strong> library from my <a href="http://github.com/agrison/legacy4j" title="">github repo</a>.</p>
+
+	<p>So, let&#8216;s get started.</p>
+
+	<h2>Hello world</h2>
+
+	<p>Let’s say you have this file to read data from, and hopefully you have the <strong>legacy4j</strong> library available in your classpath.</p>
+
+<pre>
+Hello     Adam    20100427
+Bonjour   Robert  20110912
+BuongiornoMichele 20041108
+Güten tag Karl    20100315
+</pre>
+
+	<p>All you would have to do, is to define a Java object that will hold your data, and describe how data fits in it.</p>
+
+	<p><pre class="highlight">
+<span class="nd">@FixedLengthRecord</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
+   <span class="nd">@FixedLengthField</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="n">String</span> <span class="n">greeting</span><span class="o">;</span>
+   <span class="nd">@FixedLengthField</span><span class="o">(</span><span class="mi">8</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+   <span class="nd">@DateField</span>
+   <span class="kd">public</span> <span class="n">Calendar</span> <span class="n">meetDate</span><span class="o">;</span><span class="nf">
+</span>
+<span class="nf">   public String </span><span class="nf">toString</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&quot;hello[%s, %s, %3$tY-%3$tm-%3$td]&quot;</span><span class="o">,</span> <span class="n">greeting</span><span class="o">,</span> <span class="n">name</span><span class="o">,</span>
+                           <span class="n">meetDate</span><span class="o">)</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</pre></p>
+
+	<p>And then call the library and ask it gently to read the file data into your object.</p>
+
+	<p><pre class="highlight">
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloTest</span> <span class="o">{</span><span class="nf">
+</span>
+<span class="nf">   public static void </span><span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[</span><span class="o">]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">ILegacyFile</span><span class="o">&lt;</span><span class="n">Hello</span><span class="o">&gt;</span> <span class="n">file</span> <span class="o">=</span> <span class="n">LegacyFile</span><span class="o">.</span><span class="na">fileReader</span><span class="o">(</span><span class="s">&quot;file.txt&quot;</span><span class="o">,</span> <span class="n">Hello</span><span class="o">.</span><span class="na">class</span><span class="o">)</span><span class="o">;</span>
+      <span class="k">while</span> <span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">hasNext</span><span class="o">(</span><span class="o">)</span><span class="o">)</span> <span class="o">{</span>
+         <span class="n">Hello</span> <span class="n">hello</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">next</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;&gt; &quot;</span> <span class="o">+</span> <span class="n">hello</span><span class="o">)</span><span class="o">;</span>
+      <span class="o">}</span>
+      <span class="n">file</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</pre></p>
+
+	<p>That’s it, you’ve read data from your file, with no need of any parser.</p>
+
+	<p>Here is the output of the Java program:</p>
+
+<pre>
+&gt; hello[Hello     , Adam    , 2010-04-27]
+&gt; hello[Bonjour   , Robert  , 2011-09-12]
+&gt; hello[Buongiorno, Michele , 2004-11-08]
+&gt; hello[Güten tag , Karl    , 2010-03-15]
+</pre>
+
+	<h2>Field type annotations</h2>
+
+	<p>The library makes huge use of Java annotations, that’s how it knows how to parse the file, and cut the data where it should.</p>
+
+	<p>A file is made of records (lines), a Java object needs to have the <code>@FixedLengthRecordannotation</code>, so that the library knows how to work with it.</p>
+
+	<h3>FixedLengthField</h3>
+
+	<p>The <code>@FixedLengthField</code> annotation indicates that a field is delimited in size, and its size can be set with it.</p>
+
+	<p><pre class="highlight">
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">FixedLengthField</span> <span class="o">{</span>
+   <span class="cm">/** @return the field length. */</span><span class="nf">
+</span>
+<span class="nf">   public int </span><span class="nf">value</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></p>
+
+	<h3>DateField</h3>
+
+	<p>The <code>@DateField</code> annotation indicates that a field is a Date or a Calendar object, and that the data read should be converted to the suitable destination, using a custom date format.</p>
+
+	<p><pre class="highlight">
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">DateField</span> <span class="o">{</span>
+   <span class="cm">/** @return the date format. */</span><span class="nf">
+</span>
+<span class="nf">   public String </span><span class="nf">value</span><span class="o">(</span><span class="o">)</span> <span class="k">default</span> <span class="s">&quot;yyyyMMdd&quot;</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></p>
+
+	<h3>DecimalField</h3>
+
+	<p>The <code>@DecimalField</code> annotation indicates that a field is one of int|Integer, double|Double, float|Float or BigDecimal and that the data read should be converted to the suitable destination, using a custom decimal format.</p>
+
+	<p><pre class="highlight">
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">DecimalField</span> <span class="o">{</span>
+   <span class="cm">/** @return the lenth of int and decimal value. */</span><span class="nf">
+</span>
+<span class="nf">   public int[] </span><span class="nf">value</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+   <span class="cm">/** @return the separator if any (must be of length 0 or 1). */</span><span class="nf">
+</span>
+<span class="nf">   public String </span><span class="nf">separator</span><span class="o">(</span><span class="o">)</span> <span class="k">default</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></p>
+
+	<h3>CustomField</h3>
+
+	<p>The <code>@CustomField</code> annotation indicates that a field is of a custom type and that the data read should be converted to the suitable custom type, using a custom object mapper.</p>
+
+	<p><pre class="highlight">
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">CustomField</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="n">Class</span><span class="o">&lt;</span><span class="o">?</span><span class="o">&gt;</span> <span class="n">value</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></p>
+
+	<h2>Field feature annotations</h2>
+
+	<h3>TrimField</h3>
+
+	<p>The <code>@TrimField</code> indicates whether a field should be trimmed and in what direction (left, right or both which is the default value).</p>
+
+	<p><pre class="highlight">
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">TrimField</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">enum</span> <span class="n">Type</span> <span class="o">{</span> <span class="n">Both</span><span class="o">,</span> <span class="n">Left</span><span class="o">,</span> <span class="n">Right</span> <span class="o">}</span><span class="nf">
+</span>
+<span class="nf">   public Type </span><span class="nf">value</span><span class="o">(</span><span class="o">)</span> <span class="n">defaults</span> <span class="n">Type</span><span class="o">.</span><span class="na">Both</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></p>
+
+	<h3>QuoteField</h3>
+
+	<p>The <code>@QuoteField</code> indicates whether a field should be quoted and with what characters (@[]@, <code>()</code>, <code>{}</code>, <code>''</code> or <code>""</code> which is the default value).</p>
+
+	<p><pre class="highlight">
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">QuoteField</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="kd">enum</span> <span class="n">Type</span> <span class="o">{</span> 
+      <span class="n">Brackets</span><span class="o">(</span><span class="s">&quot;[&quot;</span><span class="o">,</span> <span class="s">&quot;]&quot;</span><span class="o">)</span><span class="o">,</span> 
+      <span class="n">Parenthesis</span><span class="o">(</span><span class="s">&quot;(&quot;</span><span class="o">,</span> <span class="s">&quot;)&quot;</span><span class="o">)</span><span class="o">,</span>
+      <span class="n">Braces</span><span class="o">(</span><span class="s">&quot;{&quot;</span><span class="o">,</span> <span class="s">&quot;}&quot;</span><span class="o">)</span><span class="o">,</span>
+      <span class="n">Quote</span><span class="o">(</span><span class="s">&quot;\&quot;&quot;</span><span class="o">,</span> <span class="s">&quot;\&quot;&quot;</span><span class="o">)</span><span class="o">,</span>
+      <span class="n">SimpleQuote</span><span class="o">(</span><span class="s">&quot;'&quot;</span><span class="o">,</span> <span class="s">&quot;'&quot;</span><span class="o">)</span><span class="o">;</span>
+      
+      <span class="kd">public</span> <span class="n">String</span> <span class="n">before</span><span class="o">,</span> <span class="n">after</span><span class="o">;</span>
+      <span class="n">Type</span><span class="o">(</span><span class="n">String</span> <span class="n">before</span><span class="o">,</span> <span class="n">after</span><span class="o">)</span> <span class="o">{</span> <span class="k">this</span><span class="o">.</span><span class="na">before</span> <span class="o">=</span> <span class="n">before</span><span class="o">;</span> <span class="k">this</span><span class="o">.</span><span class="na">after</span> <span class="o">=</span> <span class="n">after</span><span class="o">;</span> <span class="o">}</span>
+   <span class="o">}</span><span class="nf">
+</span>
+<span class="nf">   public Type </span><span class="nf">value</span><span class="o">(</span><span class="o">)</span> <span class="n">defaults</span> <span class="n">Type</span><span class="o">.</span><span class="na">Quote</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></p>
+
+	<h2>Sample code</h2>
+
+	<h3>The file to be parsed</h3>
+
+<pre>
+0001{Alex    }12345678,9020121215Alexandre Grison
+...
+</pre>
+
+	<h3>The <code>Item</code> entity</h3>
+
+	<p><pre class="highlight">
+<span class="nd">@FixedLengthRecord</span><span class="o">(</span><span class="n">ignoreMatching</span><span class="o">=</span><span class="s">&quot;^#.*|^-.*|^\\s+Page.*$&quot;</span><span class="o">,</span> <span class="n">ignoreEmpty</span><span class="o">=</span><span class="kc">true</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Item</span> <span class="o">{</span>
+   <span class="nd">@FixedLengthField</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="kt">int</span> <span class="n">id</span><span class="o">;</span>
+   <span class="nd">@FixedLengthField</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+   <span class="nd">@TrimField</span>
+   <span class="nd">@QuoteField</span><span class="o">(</span><span class="n">Type</span><span class="o">.</span><span class="na">Braces</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+   <span class="nd">@DecimalField</span><span class="o">(</span><span class="o">{</span><span class="mi">8</span><span class="o">,</span> <span class="mi">2</span><span class="o">}</span><span class="o">)</span> <span class="c1">// size = 8 + 2 = 10
+</span>
+<span class="c1"></span>   <span class="kd">public</span> <span class="n">BigDecimal</span> <span class="n">num1</span><span class="o">;</span>
+   <span class="nd">@DecimalField</span><span class="o">(</span><span class="n">value</span><span class="o">=</span><span class="o">{</span><span class="mi">7</span><span class="o">,</span> <span class="mi">4</span><span class="o">}</span><span class="o">,</span> <span class="n">separator</span><span class="o">=</span><span class="s">&quot;,&quot;</span><span class="o">)</span> <span class="c1">// size = 7 + 4 + 1 = 12
+</span>
+<span class="c1"></span>   <span class="kd">public</span> <span class="n">Double</span> <span class="n">num2</span><span class="o">;</span>
+   <span class="nd">@DateField</span><span class="o">(</span><span class="s">&quot;yyyyMMdd&quot;</span><span class="o">)</span> <span class="c1">// size = &quot;yyyyMMdd&quot;.length() = 8
+</span>
+<span class="c1"></span>   <span class="kd">public</span> <span class="n">Calendar</span> <span class="n">cal</span><span class="o">;</span>
+   <span class="nd">@FixedLengthField</span><span class="o">(</span><span class="mi">22</span><span class="o">)</span>
+   <span class="nd">@CustomField</span><span class="o">(</span><span class="n">PersonMapper</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+   <span class="kd">public</span> <span class="n">Person</span> <span class="n">person</span><span class="o">;</span><span class="nf">
+</span>
+<span class="nf">   public String </span><span class="nf">toString</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&quot;Item [id=%s, name='%s', num1=%s, num2=%s, cal=%s, person=%s]&quot;</span><span class="o">,</span> 
+            <span class="n">id</span><span class="o">,</span> <span class="n">name</span><span class="o">,</span> <span class="n">num1</span><span class="o">,</span> <span class="n">num2</span><span class="o">,</span><span class="nf"> new </span><span class="nf">SimpleDateFormat</span><span class="o">(</span><span class="s">&quot;dd/MM/yyyy&quot;</span><span class="o">)</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">cal</span><span class="o">.</span><span class="na">getTime</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">,</span> <span class="n">person</span>
+      <span class="o">)</span><span class="o">;</span>
+   <span class="o">}</span><span class="nf">
+</span>
+<span class="nf">   public String </span><span class="nf">format</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</pre></p>
+
+	<h3>The <code>Person</code> entity</h3>
+
+	<p><pre class="highlight">
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+   <span class="kd">public</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="n">surName</span><span class="o">;</span><span class="nf">
+</span>
+<span class="nf">   public String </span><span class="nf">toString</span><span class="o">(</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&quot;p[%s, %s]&quot;</span><span class="o">,</span> <span class="n">firstName</span><span class="o">,</span> <span class="n">surName</span><span class="o">)</span><span class="o">;</span> <span class="o">}</span>
+<span class="o">}</span>
+</pre></p>
+
+	<h3>The Person custom mapper</h3>
+
+	<p><pre class="highlight">
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonMapper</span> <span class="kd">implements</span> <span class="n">FieldMapper</span> <span class="o">{</span>
+   <span class="nd">@Override</span><span class="nf">
+</span>
+<span class="nf">   public int </span><span class="nf">fill</span><span class="o">(</span><span class="n">Object</span> <span class="n">inst</span><span class="o">,</span> <span class="n">Field</span> <span class="n">field</span><span class="o">,</span> <span class="n">String</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">try</span> <span class="o">{</span>
+         <span class="n">FixedLengthField</span> <span class="n">flf</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="na">getAnnotation</span><span class="o">(</span><span class="n">FixedLengthField</span><span class="o">.</span><span class="na">class</span><span class="o">)</span><span class="o">;</span>
+         <span class="k">if</span> <span class="o">(</span><span class="n">flf</span> <span class="o">=</span><span class="o">=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+         
+         <span class="k">if</span> <span class="o">(</span><span class="n">field</span><span class="o">.</span><span class="na">getType</span><span class="o">(</span><span class="o">)</span> <span class="o">=</span><span class="o">=</span> <span class="n">Person</span><span class="o">.</span><span class="na">class</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">Person</span> <span class="n">p</span> <span class="o">=</span><span class="nf"> new </span><span class="nf">Person</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+            <span class="n">p</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">10</span><span class="o">)</span><span class="o">.</span><span class="na">trim</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+            <span class="n">p</span><span class="o">.</span><span class="na">surName</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span><span class="o">.</span><span class="na">trim</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+            <span class="n">field</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">inst</span><span class="o">,</span> <span class="n">p</span><span class="o">)</span><span class="o">;</span>
+         <span class="o">}</span>
+         
+         <span class="k">return</span> <span class="n">flf</span><span class="o">.</span><span class="na">value</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span><span class="nf">
+</span>
+<span class="nf">         throw new </span><span class="nf">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">)</span><span class="o">;</span>
+      <span class="o">}</span>
+   <span class="o">}</span>
+
+   <span class="nd">@Override</span><span class="nf">
+</span>
+<span class="nf">   public String </span><span class="nf">toString</span><span class="o">(</span><span class="n">Object</span> <span class="n">inst</span><span class="o">,</span> <span class="n">Field</span> <span class="n">field</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">try</span> <span class="o">{</span>
+         <span class="n">Person</span> <span class="n">p</span> <span class="o">=</span> <span class="o">(</span><span class="n">Person</span><span class="o">)</span><span class="n">field</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">inst</span><span class="o">)</span><span class="o">;</span>
+         <span class="k">return</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&quot;%-10s%-10s&quot;</span><span class="o">,</span> <span class="n">p</span><span class="o">.</span><span class="na">firstName</span><span class="o">,</span> <span class="n">p</span><span class="o">.</span><span class="na">surName</span><span class="o">)</span><span class="o">;</span>
+      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span><span class="nf">
+</span>
+<span class="nf">         throw new </span><span class="nf">RuntimeException</span><span class="o">(</span><span class="n">e</span><span class="o">)</span><span class="o">;</span>
+      <span class="o">}</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</pre></p>
+
+	<h3>The whole program</h3>
+
+	<p><pre class="highlight">
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span><span class="nf">
+</span>
+<span class="nf">   public static void </span><span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[</span><span class="o">]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">FixedLengthFile</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FixedLengthFile</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="o">(</span><span class="s">&quot;positionnal.txt&quot;</span><span class="o">,</span> <span class="n">Item</span><span class="o">.</span><span class="na">class</span><span class="o">)</span><span class="o">;</span>
+      <span class="n">EngineMappers</span><span class="o">.</span><span class="na">registerMapper</span><span class="o">(</span><span class="n">Person</span><span class="o">.</span><span class="na">class</span><span class="o">,</span><span class="nf"> new </span><span class="nf">PersonMapper</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+      <span class="n">file</span><span class="o">.</span><span class="na">open</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+      <span class="k">while</span> <span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">hasNext</span><span class="o">(</span><span class="o">)</span><span class="o">)</span> <span class="o">{</span>
+         <span class="n">Item</span> <span class="n">item</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">next</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;&gt; &quot;</span> <span class="o">+</span> <span class="n">item</span><span class="o">)</span><span class="o">;</span>
+         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;= &quot;</span> <span class="o">+</span> <span class="n">RecordConverter</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">item</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+      <span class="o">}</span>
+      <span class="c1">// print the items back
+</span>
+<span class="c1"></span>      <span class="n">Item</span> <span class="n">item</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+      <span class="k">while</span> <span class="o">(</span><span class="o">(</span><span class="n">item</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="na">readNext</span><span class="o">(</span><span class="o">)</span><span class="o">)</span> <span class="o">!</span><span class="o">=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;&gt; &quot;</span> <span class="o">+</span> <span class="n">item</span><span class="o">)</span><span class="o">;</span>
+         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;= &quot;</span> <span class="o">+</span> <span class="n">RecordConverter</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">item</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+      <span class="o">}</span>
+      <span class="n">file</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</pre></p>
+
+         <div class="footer">Alexandre Grison &mdash; Generated using <a href="http://www.grison.me/jssg/">Jssg</a></div>      </div>
+   </body>
+</html>
