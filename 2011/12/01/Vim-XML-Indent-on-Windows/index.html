@@ -25,6 +25,7 @@
          <h2>Code</h2>
          <ul>
             <li><a href="/jssg">Jssg</a></li>
+            <li><a href="/jtoml">JTOML</a></li>
             <li><a href="/peculium">Peculium</a></li>
             <li><a href="/kree">Kree!</a></li>
             <li><a href="/legacy4j">Legacy4j</a></li>
@@ -51,9 +52,7 @@
 
 <p>I knew I could do something like <code>:%!xmllint</code> in Vim and bam it would work. All I was needing was that external program. Instead of searching on the web for a port from Cygwin or something else, I did write a little tiny xmllint in Java. After that I just had to create some <code>.bat</code> file in my <code>%PATH%</code> and it worked like a charm.</p>
 
-<p><pre class="highlight">
-
-<span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
+<p><pre class="highlight java"><span class="kn">import</span> <span class="nn">java.io.*</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.logging.*</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">javax.xml.parsers.DocumentBuilderFactory</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.w3c.dom.Document</span><span class="o">;</span>
@@ -61,27 +60,27 @@
 <span class="kn">import</span> <span class="nn">com.sun.org.apache.xml.internal.serialize.*</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Xmllint</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">LOG</span> <span class="o">=</span> <span class="n">Logger</span><span class="o">.</span><span class="na">getAnonymousLogger</span><span class="o">(</span><span class="o">)</span><span class="o">;</span><span class="nf"></span>
-<span class="nf"></span>
-<span class="nf">    public static void </span><span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[</span><span class="o">]</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">LOG</span> <span class="o">=</span> <span class="n">Logger</span><span class="o">.</span><span class="na">getAnonymousLogger</span><span class="o">();</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="k">try</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">formatStdIn</span><span class="o">(</span><span class="o">)</span><span class="o">)</span><span class="o">;</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">formatStdIn</span><span class="o">());</span>
         <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">LOG</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="s">&quot;Could not indent XML.&quot;</span><span class="o">,</span> <span class="n">e</span><span class="o">)</span><span class="o">;</span>
+            <span class="n">LOG</span><span class="o">.</span><span class="na">log</span><span class="o">(</span><span class="n">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="s">&quot;Could not indent XML.&quot;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
         <span class="o">}</span>
-    <span class="o">}</span><span class="nf"></span>
-<span class="nf"></span>
-<span class="nf">    static String </span><span class="nf">formatStdIn</span><span class="o">(</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Throwable</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">Document</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">parseStdIn</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
-        <span class="kd">final</span> <span class="n">OutputFormat</span> <span class="n">format</span> <span class="o">=</span><span class="nf"> new </span><span class="nf">OutputFormat</span><span class="o">(</span><span class="n">doc</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">,</span> <span class="kc">true</span><span class="o">)</span> <span class="o">{</span> <span class="o">{</span> <span class="n">setIndent</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span><span class="o">;</span> <span class="o">}</span> <span class="o">}</span><span class="o">;</span>
-        <span class="kd">final</span> <span class="n">Writer</span> <span class="n">out</span> <span class="o">=</span><span class="nf"> new </span><span class="nf">StringWriter</span><span class="o">(</span><span class="o">)</span><span class="o">;</span><span class="nf"></span>
-<span class="nf">        new </span><span class="nf">XMLSerializer</span><span class="o">(</span><span class="n">out</span><span class="o">,</span> <span class="n">format</span><span class="o">)</span><span class="o">.</span><span class="na">serialize</span><span class="o">(</span><span class="n">doc</span><span class="o">)</span><span class="o">;</span>
-        <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="o">)</span><span class="o">;</span>
-    <span class="o">}</span><span class="nf"></span>
-<span class="nf"></span>
-<span class="nf">    static Document </span><span class="nf">parseStdIn</span><span class="o">(</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Throwable</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="n">InputSource</span> <span class="n">is</span> <span class="o">=</span><span class="nf"> new </span><span class="nf">InputSource</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">)</span><span class="o">;</span>
-        <span class="k">return</span> <span class="n">DocumentBuilderFactory</span><span class="o">.</span><span class="na">newInstance</span><span class="o">(</span><span class="o">)</span><span class="o">.</span><span class="na">newDocumentBuilder</span><span class="o">(</span><span class="o">)</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">is</span><span class="o">)</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="n">String</span> <span class="nf">formatStdIn</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Throwable</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">Document</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">parseStdIn</span><span class="o">();</span>
+        <span class="kd">final</span> <span class="n">OutputFormat</span> <span class="n">format</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OutputFormat</span><span class="o">(</span><span class="n">doc</span><span class="o">,</span> <span class="s">&quot;UTF-8&quot;</span><span class="o">,</span> <span class="kc">true</span><span class="o">)</span> <span class="o">{</span> <span class="o">{</span> <span class="n">setIndent</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span> <span class="o">}</span> <span class="o">};</span>
+        <span class="kd">final</span> <span class="n">Writer</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringWriter</span><span class="o">();</span>
+        <span class="k">new</span> <span class="nf">XMLSerializer</span><span class="o">(</span><span class="n">out</span><span class="o">,</span> <span class="n">format</span><span class="o">).</span><span class="na">serialize</span><span class="o">(</span><span class="n">doc</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="n">Document</span> <span class="nf">parseStdIn</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Throwable</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">InputSource</span> <span class="n">is</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InputSource</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">DocumentBuilderFactory</span><span class="o">.</span><span class="na">newInstance</span><span class="o">().</span><span class="na">newDocumentBuilder</span><span class="o">().</span><span class="na">parse</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre>
@@ -122,8 +121,8 @@ java Xmllint
           <div id="disqus_thread"></div>
           <script type="text/javascript">
               var disqus_shortname = 'grison';
-              var disqus_identifier = '/blog/Vim XML Indent on Windows';
-              var disqus_url = 'http://www.grison.me/blog/2011/12/01/Vim-XML-Indent-on-Windows';
+              var disqus_identifier = "/blog/Vim XML Indent on Windows";
+              var disqus_url = 'http://www.grison.me/2011/12/01/Vim-XML-Indent-on-Windows';
               var disqus_developer = 1;
               (function() {
                   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

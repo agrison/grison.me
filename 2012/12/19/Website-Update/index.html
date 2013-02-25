@@ -25,6 +25,7 @@
          <h2>Code</h2>
          <ul>
             <li><a href="/jssg">Jssg</a></li>
+            <li><a href="/jtoml">JTOML</a></li>
             <li><a href="/peculium">Peculium</a></li>
             <li><a href="/kree">Kree!</a></li>
             <li><a href="/legacy4j">Legacy4j</a></li>
@@ -115,8 +116,7 @@ The site is architectured in the following way:
 
 	<p>This is the markdown source for the first blog post of this site <a href="http://grison.me/blog/2011/10/29/Hello" title="">Hello</a>.</p>
 
-	<p><pre class="highlight">
----
+	<p><pre class="highlight html">---
 title: Hello
 layout: main
 description: Welcome note.
@@ -136,24 +136,23 @@ Hello
 
 	<p>The final <code>HTML</code> layout is resolved using <code>Freemarker</code>. <code>Jssg</code> provides <code>Freemarker</code> with context variables about the blog post or site page that is being rendered like the <code>${content}</code> variable for the page content and <code>${posts}</code> for the list of available blog posts.</p>
 
-	<p><pre class="highlight">
-<span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;head</span><span class="nt">&gt;</span>
+	<p><pre class="highlight html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+   <span class="nt">&lt;head&gt;</span>
       <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html;charset=UTF-8&quot;</span> <span class="nt">/&gt;</span>
-      <span class="nt">&lt;title</span><span class="nt">&gt;</span>${header['title']}<span class="nt">&lt;/title&gt;</span>
+      <span class="nt">&lt;title&gt;</span>${header['title']}<span class="nt">&lt;/title&gt;</span>
       <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;/media/css/style.css&quot;</span> <span class="nt">/&gt;</span>
    <span class="nt">&lt;/head&gt;</span>
-   <span class="nt">&lt;body</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;body&gt;</span>
 <span class="err">&lt;</span>#include &quot;nav.html&quot;&gt;
 
       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
          ${content}
          
-         <span class="nt">&lt;ul</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;ul&gt;</span>
          <span class="err">&lt;</span>#assign blogPosts = posts?sort_by(&quot;date&quot;)&gt;
          <span class="err">&lt;</span>#foreach post in blogPosts?reverse&gt;
-            <span class="nt">&lt;li</span><span class="nt">&gt;</span><span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;date&quot;</span><span class="nt">&gt;</span>${post.date?date?string.medium}<span class="nt">&lt;/span&gt;</span> <span class="ni">&amp;mdash;</span> <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;${post.url}&quot;</span><span class="nt">&gt;</span>${post.title}<span class="nt">&lt;/a&gt;</span><span class="nt">&lt;/li&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;span</span> <span class="na">class=</span><span class="s">&quot;date&quot;</span><span class="nt">&gt;</span>${post.date?date?string.medium}<span class="nt">&lt;/span&gt;</span> <span class="ni">&amp;mdash;</span> <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;${post.url}&quot;</span><span class="nt">&gt;</span>${post.title}<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
          <span class="err">&lt;</span>/#foreach&gt;
          <span class="nt">&lt;/ul&gt;</span>
 
@@ -167,8 +166,8 @@ Hello
           <div id="disqus_thread"></div>
           <script type="text/javascript">
               var disqus_shortname = 'grison';
-              var disqus_identifier = '/blog/Website update, using Jssg';
-              var disqus_url = 'http://www.grison.me/blog/2012/12/19/Website-Update';
+              var disqus_identifier = "/blog/Website update, using Jssg";
+              var disqus_url = 'http://www.grison.me/2012/12/19/Website-Update';
               var disqus_developer = 1;
               (function() {
                   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

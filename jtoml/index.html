@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+      <title>grison.me - JTOML - TOML for Java</title>
+      <link rel="stylesheet" type="text/css" href="/media/css/style.css" />
+      <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
+      <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+      <script type="text/javascript" src="/media/javascript/slider.js"></script>
+      <script type="text/javascript" src="/media/javascript/main.js"></script>
+      <style type="text/css">
+      .content ul li { letter-spacing: 1px; }
+      .content p { text-align: justify; font-size: 16px; }
+      </style>
+   </head>
+   <body>
+      <nav>
+         <div id="logo">g</div>
+         <h1>
+            <a href="/">@Autowired<br/><span>Geek blog;</span></a><br/>
+            <span class="name">// Alexandre Grison</span>
+         </h1>
+
+         <h2><a href="/">Home</a></h2>
+         <h2>Code</h2>
+         <ul>
+            <li><a href="/jssg">Jssg</a></li>
+            <li><a href="/jtoml">JTOML</a></li>
+            <li><a href="/peculium">Peculium</a></li>
+            <li><a href="/kree">Kree!</a></li>
+            <li><a href="/legacy4j">Legacy4j</a></li>
+            <li><a href="/ocamail">OCamail</a></li>
+         </ul>
+         <h2><a href="/photo">Photography</a></h2>
+         <h2><a href="/ego">Ego</a></h2>
+         <h2>Online</h2>
+         <p id="online">
+            <a href="http://twitter.com/#!/algrison"><img src="/media/images/icons/twitter.png" alt="twitter" /></a>
+            <a href="https://www.facebook.com/alexandre.grison"><img src="/media/images/icons/facebook.png" alt="facebook" /></a>
+            <a href="https://plus.google.com/114681009187194342514/posts"><img src="/media/images/icons/gplus.png" alt="google+" /></a>
+            <br />
+            <a href="http://fr.linkedin.com/pub/alexandre-grison/39/ba6/b56"><img src="/media/images/icons/linkedin.png" alt="linkedin" /></a>
+            <a href="http://github.com/agrison"><img src="/media/images/icons/github.png" alt="github" /></a>
+            <a href="http://www.flickr.com/photos/agrison"><img src="/media/images/icons/flickr.png" alt="flickr" /></a>
+         </p>
+      </nav>
+      <div class="content">
+         
+	<h2><span class="caps">TOML</span> for Java</h2>
+
+	<p>This is a parser for Tom Preson-Werner&#8216;s (@mojombo) <a href="https://raw.github.com/mojombo/toml/" title="">TOML</a> markup language, using Java.</p>
+
+	<h3>GitHub project</h3>
+
+	<p>You can browse the project on my GitHub repository <a href="https://github.com/agrison/jtoml" title="">@agrison/jtoml</a>.</p>
+
+	<h3>Usage</h3>
+
+	<p><pre class="highlight java"><span class="c1">// parse from a String or from a File</span>
+<span class="n">Toml</span> <span class="n">toml</span> <span class="o">=</span> <span class="n">Toml</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">&quot;pi = 3.14\nfoo = \&quot;bar\&quot;&quot;</span><span class="o">);</span>
+<span class="n">toml</span> <span class="o">=</span> <span class="n">Toml</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&quot;foo.toml&quot;</span><span class="o">));</span>
+
+<span class="c1">// get different types</span>
+<span class="n">toml</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;foo&quot;</span><span class="o">);</span>
+<span class="n">toml</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;foo&quot;</span><span class="o">);</span>
+<span class="n">toml</span><span class="o">.</span><span class="na">getBoolean</span><span class="o">(</span><span class="s">&quot;foo&quot;</span><span class="o">);</span>
+<span class="n">toml</span><span class="o">.</span><span class="na">getDate</span><span class="o">(</span><span class="s">&quot;foo&quot;</span><span class="o">);</span>
+<span class="n">toml</span><span class="o">.</span><span class="na">getDouble</span><span class="o">(</span><span class="s">&quot;foo&quot;</span><span class="o">);</span>
+<span class="n">toml</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">&quot;foo&quot;</span><span class="o">);</span>
+<span class="n">toml</span><span class="o">.</span><span class="na">getList</span><span class="o">(</span><span class="s">&quot;foo&quot;</span><span class="o">);</span>
+</pre></p>
+
+	<h3>Todo</h3>
+
+
+<ul>
+	<li>New parsers using <a href="https://github.com/sirthias/parboiled/wiki" title="">Parboiled</a> and/or <a href="http://www.antlr.org" title="">ANTLR</a>.</li>
+
+</ul>
+	<h3>License</h3>
+
+	<p><span class="caps">MIT</span>.</p>
+
+	<h3>Thanks</h3>
+
+	<p>To all the contributors (in no particular order):</p>
+
+<ul>
+	<li><a href="https://github.com/MoriTanosuke" title="">@MoriTanosuke</a></li>
+	<li><a href="https://github.com/adamv" title="">@adamv</a></li>
+	<li><a href="https://github.com/mwanji" title="">@mwanji</a></li>
+	<li><a href="https://github.com/voho" title="">@voho</a></li>
+	<li><a href="https://github.com/jbman" title="">@jbman</a></li>
+</ul>
+
+         <div class="footer">Alexandre Grison &mdash; Generated using <a href="http://www.grison.me/jssg/">Jssg</a></div>      </div>
+   </body>
+</html>
