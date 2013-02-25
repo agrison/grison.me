@@ -25,6 +25,9 @@ handlers:
 - url: '/ocamail'
   static_files: 'ocamail/index.html'
   upload: '.*'
+- url: '/jtoml'
+  static_files: 'jtoml/index.html'
+  upload: '.*'
 
 # css, images and js
 - url: '/media/(.*)'
