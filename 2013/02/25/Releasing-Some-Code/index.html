@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+      <title>Releasing Some Code</title>
+      <link rel="stylesheet" type="text/css" href="/media/css/style.css" />
+      <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
+      <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+      <script type="text/javascript" src="/media/javascript/slider.js"></script>
+      <script type="text/javascript" src="/media/javascript/main.js"></script>
+      <style type="text/css">
+      .content ul li { letter-spacing: 1px; }
+      .content p { text-align: justify; font-size: 16px; }
+      </style>
+   </head>
+   <body>
+      <nav>
+         <div id="logo">g</div>
+         <h1>
+            <a href="/">@Autowired<br/><span>Geek blog;</span></a><br/>
+            <span class="name">// Alexandre Grison</span>
+         </h1>
+
+         <h2><a href="/">Home</a></h2>
+         <h2>Code</h2>
+         <ul>
+            <li><a href="/jssg">Jssg</a></li>
+            <li><a href="/peculium">Peculium</a></li>
+            <li><a href="/kree">Kree!</a></li>
+            <li><a href="/legacy4j">Legacy4j</a></li>
+            <li><a href="/ocamail">OCamail</a></li>
+         </ul>
+         <h2><a href="/photo">Photography</a></h2>
+         <h2><a href="/ego">Ego</a></h2>
+         <h2>Online</h2>
+         <p id="online">
+            <a href="http://twitter.com/#!/algrison"><img src="/media/images/icons/twitter.png" alt="twitter" /></a>
+            <a href="https://www.facebook.com/alexandre.grison"><img src="/media/images/icons/facebook.png" alt="facebook" /></a>
+            <a href="https://plus.google.com/114681009187194342514/posts"><img src="/media/images/icons/gplus.png" alt="google+" /></a>
+            <br />
+            <a href="http://fr.linkedin.com/pub/alexandre-grison/39/ba6/b56"><img src="/media/images/icons/linkedin.png" alt="linkedin" /></a>
+            <a href="http://github.com/agrison"><img src="/media/images/icons/github.png" alt="github" /></a>
+            <a href="http://www.flickr.com/photos/agrison"><img src="/media/images/icons/flickr.png" alt="flickr" /></a>
+         </p>
+      </nav>
+      <div class="content">
+        <span class="post-date" style="float: right">Feb 25, 2013</span>
+         
+	<h2>Releasing Some Code</h2>
+
+	<p>I&#8216;ve been holding on my <a href="http://grison.me/2013/01/01/New-Year-Resolutions" title="">New Year Resolutions</a> lately.<br>
+I have released some code to <a href="https://github.com/agrison" title="">GitHub</a>, more precisely <a href="http://grison.me/jssg" title="">jssg</a>, <a href="http://grison.me/legacy4j" title="">legacy4j</a>.</p>
+
+	<h2>JToml: <span class="caps">TOML</span> for Java</h2>
+
+	<p>Yesterday while reading <a href="http://news.ycombinator.com" title="">Hacker News</a> a thread about <a href="https://github.com/mojombo/toml" title="">TOML</a> appeared and since there were no parser available in Java for the moment, I decided to create one, so if it can be of any use sooner or later (personal and work), it would be already done.</p>
+
+	<p>I have already commited the code to the <a href="https://github.com/agrison/jtoml" title="">JToml github repository</a>, and it supports (as for now) the whole specification made by Tom Preston-Werner on the official <span class="caps">TOML</span> webpage.</p>
+
+	<p>Don&#8216;t hesitate to fork/pull/whatever the code and add more features, more tests, enhancements and correct bugs if you find some. I will update the repository as the <em>TOML</em> specification goes on.</p>
+
+	<h2>Peculium</h2>
+
+	<p>I have stopped my work on peculium for the moment (not released) as I&#8216;m learning a whole bunch of stuff on <a href="http://angularjs.org" title="">AngularJs</a>, <a href="http://emberjs.com" title="">EmberJs</a>, <a href="http://knockoutjs.com" title="">KnockoutJs</a> (to decide what to choose) and I prefer to know more of them before developing too much and making too much mistakes due to my limited knowledge of all these JS frameworks.</p>
+
+	<p>I&#8216;m thinking of EmberJs for the moment since I find the <span class="caps">REST</span> support pretty cool (fetching related entities), Entities ala <span class="caps">JPA </span>(with ManyToOne and so on), and the <a href="http://addepar.github.com/ember-table/" title="">Ember-Table</a> seems insanely great (I need frozen columns for Peculium).</p>
+
+	<h2>Gravitas</h2>
+
+	<p>So before doing too much mistakes in Peculium, I had an idea of a spin-off of Peculium using the same technologies, but easier on the UI, to manage my body weight and <span class="caps">BMI</span>.<br>
+So I&#8216;ve been going on Google, asking for it to translate <em>weight</em> and <em>diet</em> to Latin.<br>
+I don&#8216;t know anything about Latin (except for the language of the <a href="http://stargate.wikia.com/wiki/Ancient" title="">Anquietas</a> in Stargate), but <em>Gravitas</em> sounds cool.</p>
+
+	<p>Hopefully, I&#8216;ll be working on that for the following weeks, and I hope I will be able to release some code.</p>
+
+	<p>Enjoy <span style="font-size: 24px">&#x263a;</span></p>
+
+      <div id="comments">
+          <div id="disqus_thread"></div>
+          <script type="text/javascript">
+              var disqus_shortname = 'grison';
+              var disqus_identifier = '/blog/Releasing Some Code';
+              var disqus_url = 'http://www.grison.me/2013/02/25/Releasing-Some-Code';
+              var disqus_developer = 1;
+              (function() {
+                  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+         <div class="footer">Alexandre Grison &mdash; Generated using <a href="http://www.grison.me/jssg/">Jssg</a></div>      </div>
+   </body>
+</html>
