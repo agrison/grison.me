@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+      <title>Still Learning Scala</title>
+      <link rel="stylesheet" type="text/css" href="/media/css/style.css" />
+      <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,500,300italic' rel='stylesheet' />
+      <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+      <script type="text/javascript" src="/media/javascript/slider.js"></script>
+      <script type="text/javascript" src="/media/javascript/main.js"></script>
+      <style type="text/css">
+      .content ul li { letter-spacing: 1px; }
+      .content p { text-align: justify; font-size: 16px; }
+      </style>
+   </head>
+   <body>
+      <nav>
+         <div id="logo">g</div>
+         <h1>
+            <span class="name">// Alexandre Grison</span><br/>
+            <a href="/">@Autowired<br/><span>Geek blog;</span></a>
+         </h1>
+
+         <h2><a href="/">Home</a></h2>
+         <h2>Code</h2>
+         <ul>
+            <li><a href="/jssg">Jssg</a></li>
+            <li><a href="/jtoml">JTOML</a></li>
+            <li><a href="/peculium">Peculium</a></li>
+            <li><a href="/kree">Kree!</a></li>
+            <li><a href="/legacy4j">Legacy4j</a></li>
+            <li><a href="/ocamail">OCamail</a></li>
+            <li><a href="/scalocco">Scalocco</a></li>
+         </ul>
+         <h2><a href="/photo">Photography</a></h2>
+         <h2><a href="/ego">Ego</a></h2>
+         <h2>Online</h2>
+         <p id="online">
+            <a href="http://twitter.com/#!/algrison"><img src="/media/images/icons/twitter.png" alt="twitter" /></a>
+            <a href="https://www.facebook.com/alexandre.grison"><img src="/media/images/icons/facebook.png" alt="facebook" /></a>
+            <a href="https://plus.google.com/114681009187194342514/posts"><img src="/media/images/icons/gplus.png" alt="google+" /></a>
+            <br />
+            <a href="http://fr.linkedin.com/pub/alexandre-grison/39/ba6/b56"><img src="/media/images/icons/linkedin.png" alt="linkedin" /></a>
+            <a href="http://github.com/agrison"><img src="/media/images/icons/github.png" alt="github" /></a>
+            <a href="http://www.flickr.com/photos/agrison"><img src="/media/images/icons/flickr.png" alt="flickr" /></a>
+         </p>
+      </nav>
+      <div class="content">
+        <span class="post-date" style="float: right">Mar 21, 2013</span>
+         
+	<h2>Learning Scala</h2>
+
+	<p>I&#8216;m really learning Scala, in depth this time. Indeed, I&#8216;ve been reading <strong>Programming in Scala</strong> these days.</p>
+
+	<p>While learning it I discovered what are <strong>implicits</strong>, and how cool they are. I'll let you discover what they are by reading the <a href="http://www.artima.com/pins1ed/implicit-conversions-and-parameters.html" title="">following article</a> since they explain that way better than me.</p>
+
+	<p>A cool use of <strong>implicits</strong> is that you can extend the Scala language with cool new syntaxes features, for example what if you like the Python's <code>in</code> operator ?<br>
+What if you would like to have it in Scala to check if a <code>Map</code> contains a specific key ?</p>
+
+	<p>With <strong>implicits</strong> it is really easy to add that kind of feature. Let&#8216;s see how we would do that.</p>
+
+	<p><pre class="highlight scala"><span class="c1">// Declare an helper class that contains the method(s) we would like to add to Map</span>
+<span class="k">class</span> <span class="nc">MapHelper</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">o</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">def</span> <span class="n">in</span><span class="o">(</span><span class="n">map</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">T</span>, <span class="kt">Any</span><span class="o">])</span> <span class="k">=</span> <span class="n">map</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">o</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="c1">// Declare our implicit that will wrap anything left to `in` into an Expression</span>
+<span class="c1">// so that `in()` is bound and can be called by Scala automatically</span>
+<span class="k">implicit</span> <span class="k">def</span> <span class="n">mapHelperWrapper</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">o</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">MapHelper</span><span class="o">(</span><span class="n">o</span><span class="o">)</span>
+
+<span class="c1">// output &quot;true&quot;</span>
+<span class="o">(</span><span class="s">&quot;a&quot;</span> <span class="n">in</span> <span class="nc">Map</span><span class="o">(</span><span class="s">&quot;a&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;b&quot;</span><span class="o">))</span> <span class="n">println</span>
+
+<span class="c1">// output &quot;false&quot;</span>
+<span class="o">(</span><span class="s">&quot;foo&quot;</span> <span class="n">in</span> <span class="nc">Map</span><span class="o">(</span><span class="s">&quot;bar&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;foo&quot;</span><span class="o">))</span> <span class="n">println</span>
+</pre></p>
+
+	<p>What happens is that Scala replace our call with the following, automagically:<br>
+<pre class="highlight scala"><span class="n">println</span><span class="o">(</span><span class="k">new</span> <span class="nc">MapHelper</span><span class="o">(</span><span class="s">&quot;a&quot;</span><span class="o">).</span><span class="n">in</span><span class="o">(</span><span class="nc">Map</span><span class="o">(</span><span class="s">&quot;a&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;b&quot;</span><span class="o">))</span>
+</pre></p>
+
+	<p>This is really a short example, but a lot of things can be made easy with this feature. For instance:<br>
+<pre class="highlight scala"><span class="nc">Map</span><span class="o">(</span><span class="s">&quot;foo&quot;</span> <span class="o">-&gt;</span> <span class="s">&quot;bar&quot;</span><span class="o">)</span>
+<span class="c1">// -&gt; is really an implicit that let you write Maps easily</span>
+</pre></p>
+
+	<p>There seems to be no limit but your imagination !</p>
+
+	<h2>Scalocco</h2>
+
+	<p>In order to learn I wrote a quick implementation of <a href="http://jashkenas.github.com/docco/" title="">Docco</a> in Scala.</p>
+
+	<p>You can find it on my GitHub repository <a href="http://github.com/agrison/scalocco/" title="">agrison/scalocco</a>. For the moment it supports only one-line comments (using <code>//</code>)<br>
+but should soon extract params and results from scaladoc in order to present them using tables rendered as <code>HTML</code>.</p>
+
+	<h2>Scala is cool</h2>
+
+	<p>Yes you already know that. Scala is cool, and I hope I&#8216;ll have the chance to learn it better and better, and maybe use it in my day to day work.<br>
+Maybe it will be widely used in Luxembourg soon, maybe it is already ? We&#8216;ll see.</p>
+
+	<p>Enjoy <span style="font-size: 24px">&#x263a;</span></p>
+
+      <div id="comments">
+          <div id="disqus_thread"></div>
+          <script type="text/javascript">
+              var disqus_shortname = 'grison';
+              var disqus_identifier = "/blog/Still Learning Scala";
+              var disqus_url = 'http://www.grison.me/2013/03/21/Still-Learning-Scala';
+              var disqus_developer = 1;
+              (function() {
+                  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+         <div class="footer">Alexandre Grison &mdash; Generated using <a href="http://www.grison.me/jssg/">Jssg</a></div>
+		 <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-38956658-1']);
+  _gaq.push(['_setDomainName', 'grison.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>      </div>
+   </body>
+</html>

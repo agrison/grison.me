@@ -28,6 +28,9 @@ handlers:
 - url: '/jtoml'
   static_files: 'jtoml/index.html'
   upload: '.*'
+- url: '/scalocco'
+  static_files: 'scalocco/index.html'
+  upload: '.*'
 
 # css, images and js
 - url: '/media/(.*)'
