@@ -31,6 +31,9 @@ handlers:
 - url: '/scalocco'
   static_files: 'scalocco/index.html'
   upload: '.*'
+- url: '/scalocco/source'
+  static_files: 'scalocco/scalocco.scala.html'
+  upload: '.*'
 
 # css, images and js
 - url: '/media/(.*)'
