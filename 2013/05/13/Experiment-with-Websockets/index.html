@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Sermonis an experimentation with Websockets - Blog of Alexandre Grison - grison.me</title>
+      <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+      <meta name="generator" content="jssg" />
+      <link rel='index' title="Website of Alexandre Grison" href="http://grison.me/" />
+      <meta name="keywords" content="Alexande Grison, grison, grison.me, Java, Scala, IT, blog">
+      <meta name="description" content="Website of Alexandre Grison" />
+      <meta name="robots" content="index, follow" />
+	  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+      <link rel="stylesheet" type="text/css" href="/media/css/style.css" />
+      <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,500,300italic' rel='stylesheet' />
+      <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+      <script type="text/javascript" src="/media/javascript/slider.js"></script>
+      <script type="text/javascript" src="/media/javascript/main.js"></script>
+      <style type="text/css">
+      .content ul li { letter-spacing: 1px; }
+      .content p { text-align: justify; font-size: 16px; }
+      </style>
+   </head>
+   <body>
+      <nav>
+         <div id="logo">g</div>
+         <h1>
+            <span class="name">// Alexandre Grison</span><br/>
+            <a href="/">@Autowired<br/><span>Geek blog;</span></a>
+         </h1>
+
+         <h2><a href="/">Home</a></h2>
+         <h2>Code</h2>
+         <ul>
+            <li><a href="/jssg">Jssg</a></li>
+            <li><a href="/jtoml">JTOML</a></li>
+            <li><a href="/kree">Kree!</a></li>
+            <li><a href="/legacy4j">Legacy4j</a></li>
+            <li><a href="/peculium">Peculium</a></li>
+            <li><a href="/scalocco">Scalocco</a></li>
+            <li><a href="/sermonis">Sermonis</a></li>
+            <li><a href="/ocamail">OCamail</a></li>
+         </ul>
+         <h2><a href="/photo">Photography</a></h2>
+         <h2><a href="/ego">Ego</a></h2>
+         <h2>Online</h2>
+         <p id="online">
+            <a href="http://twitter.com/#!/algrison"><img src="/media/images/icons/twitter.png" alt="twitter" /></a>
+            <a href="https://www.facebook.com/alexandre.grison"><img src="/media/images/icons/facebook.png" alt="facebook" /></a>
+            <a href="https://plus.google.com/114681009187194342514/posts"><img src="/media/images/icons/gplus.png" alt="google+" /></a>
+            <br />
+            <a href="http://fr.linkedin.com/pub/alexandre-grison/39/ba6/b56"><img src="/media/images/icons/linkedin.png" alt="linkedin" /></a>
+            <a href="http://github.com/agrison"><img src="/media/images/icons/github.png" alt="github" /></a>
+            <a href="http://www.flickr.com/photos/agrison"><img src="/media/images/icons/flickr.png" alt="flickr" /></a>
+         </p>
+      </nav>
+      <div class="content">
+        <span class="post-date" style="float: right">May 13, 2013</span>
+         
+	<h2>Sermonis, an experimentation with Websockets</h2>
+
+	<p>For the past week I did some experimentations with some interesting technologies, and at the end I had some kind of real time webchat application platform where users could create chat rooms (with or without passwords) and share URLs to friends so that they could join the discussion.</p>
+
+	<p>The <b>Sermonis</b> application was born. Its goal is to provide users an easy way to deploy a simple web application that let users talk with each other without the need to install an application like Skype.</p>
+
+	<p><b>Sermonis</b> supports Markdown and password protected rooms. It&#8216;s not aimed to grow bigger than that for the moment.</p>
+
+	<h2>Get the code</h2>
+
+	<p>The code is on Github <a href="https://github.com/agrison/sermonis" title="">@agrison/sermonis</a> and you can already download it and build it.</p>
+
+	<h2>First run</h2>
+
+	<p>In order to test <b>Sermonis</b> on your local machine all you need is Java, Maven and mongoDB. If you want to test rapidly just type the following command:</p>
+
+	<p>Install a mongoDB on your machine, by downloading it <a href="http://www.mongodb.org/downloads" title="">here</a>, then open a shell and type the following to run it:</p>
+
+	<p><pre class="highlight bash"><span class="nv">$ </span><span class="nb">cd </span>mongodb/bin
+<span class="nv">$ </span>mkdir data
+<span class="nv">$ </span>mongod --dbpath data
+</pre></p>
+
+	<p>Download <b>Sermonis</b> and run it like this:</p>
+
+	<p><pre class="highlight bash"><span class="nv">$ </span><span class="nb">cd </span>sermonis
+<span class="nv">$ </span>mvn compile <span class="nb">exec</span>:java -Dexec.mainClass<span class="o">=</span>me.grison.sermonis.SermonisInit jetty:run
+</pre></p>
+
+	<p>During the execution of the command you will be asked for an administrator password. This very password will be stored in a file called <code>sermonis.properties</code> in an encrypted way (md5 hash of an <span class="caps">AES</span> password encrypted with a secret token generated previously).</p>
+
+	<p>Here is a sample of <code>sermonis.properties</code> file</p>
+
+	<p><pre class="highlight properties"><span class="c">#                                          _     </span>
+<span class="c">#    ________  _________ ___  ____  ____  (_)____</span>
+<span class="c">#   / ___/ _ \/ ___/ __ `__ \/ __ \/ __ \/ / ___/</span>
+<span class="c">#  (__  )  __/ /  / / / / / / /_/ / / / / (__  ) </span>
+<span class="c"># /____/\___/_/  /_/ /_/ /_/\____/_/ /_/_/____/  </span>
+<span class="c">#                                               </span>
+
+<span class="c"># Sermonis property file generated on Mon May 13 10:11:44 CEST 2013</span>
+
+<span class="c"># Sermonis secret token used to encrypt password and browser request information into cookies</span>
+<span class="c"># to secure access to password protected room and admin interface</span>
+<span class="na">secretKey</span><span class="o">=</span><span class="s">0b388F1ab18EA5-7426E2-2e2C-8f1781683f-68Da1b1eA2C8-b5BD161Fb2f4140D06</span>
+
+<span class="c"># MD5 hash of the admin password AES encrypted with the above secret token</span>
+<span class="na">adminPassword</span><span class="o">=</span><span class="s">E591B207FA96239F368382E45BC55816</span>
+</pre></p>
+
+	<p>and a sample of the execution of the previous <code>mvn</code> command.</p>
+
+	<p><pre class="highlight bash"><span class="nv">$ </span>mvn compile <span class="nb">exec</span>:java -Dexec.mainClass<span class="o">=</span>me.grison.sermonis.SermonisInit jetty:run
+<span class="o">[</span>INFO<span class="o">]</span> Scanning <span class="k">for </span>projects...
+<span class="o">[</span>INFO<span class="o">]</span> ------------------------------------------------------------------------
+<span class="o">[</span>INFO<span class="o">]</span> Building sermonis Maven Webapp 0.0.1-SNAPSHOT
+<span class="o">[</span>INFO<span class="o">]</span> ------------------------------------------------------------------------
+	                                          _     
+	    ________  _________ ___  ____  ____  <span class="o">(</span>_<span class="o">)</span>____
+	   / ___/ _ <span class="se">\/</span> ___/ __ <span class="sb">`</span>__ <span class="se">\/</span> __ <span class="se">\/</span> __ <span class="se">\/</span> / ___/
+	  <span class="o">(</span>__  <span class="o">)</span>  __/ /  / / / / / / /_/ / / / / <span class="o">(</span>__  <span class="o">)</span> 
+	 /____/<span class="se">\_</span>__/_/  /_/ /_/ /_/<span class="se">\_</span>___/_/ /_/_/____/  
+	                                               
+
+You<span class="err">'</span>re about to generate a secret key and admin password <span class="k">for </span>sermonis.
+
+Generating the secret key...
+Please provide an admin password: 
+foobar
+Updating sermonis.properties...
+All <span class="k">done</span>!
+<span class="o">[</span>INFO<span class="o">]</span> 
+<span class="o">[</span>INFO<span class="o">]</span> &gt;&gt;&gt; jetty-maven-plugin:8.1.0.v20120127:run <span class="o">(</span>default-cli<span class="o">)</span> @ sermonis &gt;&gt;&gt;
+<span class="o">[</span>INFO<span class="o">]</span> Configuring Jetty <span class="k">for </span>project: sermonis Maven Webapp
+...
+<span class="o">[</span>INFO<span class="o">]</span> Started Jetty Server
+<span class="o">[</span>INFO<span class="o">]</span> Starting scanner at interval of 1 seconds.
+</pre></p>
+
+	<h2>Play with it</h2>
+
+	<p>Just hit <a href="http://localhost:9001" title="">http://localhost:9001</a> and you will be redirected to a newly created room asking you for your username. Just share that same <span class="caps">URL</span> to someone else so that he can join you, and finally have some chat with your friend.</p>
+
+	<h2>Project page</h2>
+
+	<p>I&#8216;ve set up a special page for <b>Sermonis</b> on my website at <a href="http://grison.me/sermonis" title="">grison.me/sermonis</a></p>
+
+	<p>Enjoy <span style="font-size: 24px">&#x263a;</span></p>
+
+      <div id="comments">
+          <div id="disqus_thread"></div>
+          <script type="text/javascript">
+              var disqus_shortname = 'grison';
+              var disqus_identifier = "/blog/Sermonis an experimentation with Websockets";
+              var disqus_url = 'http://www.grison.me/2013/05/13/Experiment-with-Websockets';
+              var disqus_developer = 1;
+              (function() {
+                  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+         <div class="footer">Alexandre Grison &mdash; Generated using <a href="http://www.grison.me/jssg/">Jssg</a></div>
+		 <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-38956658-1']);
+  _gaq.push(['_setDomainName', 'grison.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>      </div>
+   </body>
+</html>

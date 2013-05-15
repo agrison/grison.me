@@ -1,51 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-      <loc>http://www.grison.me/404.html</loc>
-      <lastmod>2011-11-06</lastmod>
-  </url>
-  <url>
-      <loc>http://www.grison.me/ego/index.html</loc>
-      <lastmod>2011-11-06</lastmod>
+  <!-- grison.me pages -->
+    <url>
+      <loc>http://www.grison.me/ego</loc>
+      <lastmod>2013-05-15</lastmod>
+      <frequency>weekly</frequency>
   </url>
   <url>
       <loc>http://www.grison.me/</loc>
-      <lastmod>2011-12-02</lastmod>
+      <lastmod>2013-05-15</lastmod>
+      <frequency>weekly</frequency>
   </url>
   <url>
-      <loc>http://www.grison.me/projects/index.html</loc>
-      <lastmod>2011-12-05</lastmod>
+      <loc>http://www.grison.me/jssg</loc>
+      <lastmod>2013-05-15</lastmod>
+      <frequency>weekly</frequency>
   </url>
   <url>
-      <loc>http://www.grison.me/2011/12/07/Did-You-Mean</loc>
-      <lastmod>2011-12-07</lastmod>
+      <loc>http://www.grison.me/jtoml</loc>
+      <lastmod>2013-05-15</lastmod>
+      <frequency>weekly</frequency>
   </url>
   <url>
-      <loc>http://www.grison.me/2011/12/01/Vim-XML-Indent-on-Windows</loc>
-      <lastmod>2011-12-01</lastmod>
+      <loc>http://www.grison.me/kree</loc>
+      <lastmod>2013-05-15</lastmod>
+      <frequency>weekly</frequency>
   </url>
   <url>
-      <loc>http://www.grison.me/2011/11/20/Unix-Prompt</loc>
-      <lastmod>2011-11-20</lastmod>
+      <loc>http://www.grison.me/legacy4j</loc>
+      <lastmod>2013-05-15</lastmod>
+      <frequency>weekly</frequency>
   </url>
   <url>
-      <loc>http://www.grison.me/2011/10/29/Hello</loc>
-      <lastmod>2011-10-29</lastmod>
+      <loc>http://www.grison.me/ocamail</loc>
+      <lastmod>2013-05-15</lastmod>
+      <frequency>weekly</frequency>
   </url>
   <url>
-      <loc>http://www.grison.me/2012/12/19/Website-Update</loc>
-      <lastmod>2012-12-19</lastmod>
+      <loc>http://www.grison.me/peculium</loc>
+      <lastmod>2013-05-15</lastmod>
+      <frequency>weekly</frequency>
   </url>
   <url>
-      <loc>http://www.grison.me/2013/01/01/New-Year-Resolutions</loc>
-      <lastmod>2013-01-01</lastmod>
+      <loc>http://www.grison.me/photo</loc>
+      <lastmod>2013-05-15</lastmod>
+      <frequency>weekly</frequency>
   </url>
   <url>
-      <loc>http://www.grison.me/2013/02/01/Enjoying-IntelliJ</loc>
-      <lastmod>2013-02-01</lastmod>
+      <loc>http://www.grison.me/scalocco</loc>
+      <lastmod>2013-05-15</lastmod>
+      <frequency>weekly</frequency>
   </url>
   <url>
-      <loc>http://www.grison.me/2013/02/25/Releasing-Some-Code</loc>
-      <lastmod>2013-02-25</lastmod>
+      <loc>http://www.grison.me/sermonis</loc>
+      <lastmod>2013-05-15</lastmod>
+      <frequency>weekly</frequency>
+  </url>
+  <!-- grison.me blog post pages -->
+  <url>
+  	<loc>http://grison.me/2011/10/29/Hello</loc>
+  	<lastmod>2011-10-29</lastmod>
+  </url>
+  <url>
+  	<loc>http://grison.me/2011/11/20/Unix-Prompt</loc>
+  	<lastmod>2011-11-20</lastmod>
+  </url>
+  <url>
+  	<loc>http://grison.me/2011/12/01/Vim-XML-Indent-on-Windows</loc>
+  	<lastmod>2011-12-01</lastmod>
+  </url>
+  <url>
+  	<loc>http://grison.me/2011/12/07/Did-You-Mean</loc>
+  	<lastmod>2011-12-07</lastmod>
+  </url>
+  <url>
+  	<loc>http://grison.me/2012/12/19/Website-Update</loc>
+  	<lastmod>2012-12-19</lastmod>
+  </url>
+  <url>
+  	<loc>http://grison.me/2013/01/01/New-Year-Resolutions</loc>
+  	<lastmod>2013-01-01</lastmod>
+  </url>
+  <url>
+  	<loc>http://grison.me/2013/02/01/Enjoying-IntelliJ</loc>
+  	<lastmod>2013-02-01</lastmod>
+  </url>
+  <url>
+  	<loc>http://grison.me/2013/02/25/Releasing-Some-Code</loc>
+  	<lastmod>2013-02-25</lastmod>
+  </url>
+  <url>
+  	<loc>http://grison.me/2013/03/21/Still-Learning-Scala</loc>
+  	<lastmod>2013-03-21</lastmod>
+  </url>
+  <url>
+  	<loc>http://grison.me/2013/05/13/Experiment-with-Websockets</loc>
+  	<lastmod>2013-05-13</lastmod>
   </url>
 </urlset>

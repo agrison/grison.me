@@ -34,6 +34,9 @@ handlers:
 - url: '/scalocco/source'
   static_files: 'scalocco/scalocco.scala.html'
   upload: '.*'
+- url: '/sermonis'
+  static_files: 'sermonis/index.html'
+  upload: '.*'
 
 # css, images and js
 - url: '/media/(.*)'

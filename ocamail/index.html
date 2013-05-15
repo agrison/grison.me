@@ -27,11 +27,12 @@
          <ul>
             <li><a href="/jssg">Jssg</a></li>
             <li><a href="/jtoml">JTOML</a></li>
-            <li><a href="/peculium">Peculium</a></li>
             <li><a href="/kree">Kree!</a></li>
             <li><a href="/legacy4j">Legacy4j</a></li>
-            <li><a href="/ocamail">OCamail</a></li>
+            <li><a href="/peculium">Peculium</a></li>
             <li><a href="/scalocco">Scalocco</a></li>
+            <li><a href="/sermonis">Sermonis</a></li>
+            <li><a href="/ocamail">OCamail</a></li>
          </ul>
          <h2><a href="/photo">Photography</a></h2>
          <h2><a href="/ego">Ego</a></h2>
@@ -190,7 +191,7 @@ Responding <span class="o">[</span>221 CaMail - Simple Fake SMTP Server - Servic
         <span class="c">(* (in[1] &lt;&lt; 4 | in[2] &gt;&gt; 2) *)</span>
         <span class="k">let</span> <span class="n">i1</span> <span class="o">=</span> <span class="nn">StrUtils</span><span class="p">.</span><span class="n">safe_char</span> <span class="o">(((</span><span class="n">code</span> <span class="n">s</span> <span class="mi">1</span><span class="o">)</span> <span class="ow">lsl</span> <span class="mi">4</span><span class="o">)</span> <span class="ow">lor</span> <span class="o">((</span><span class="n">code</span> <span class="n">s</span> <span class="mi">2</span><span class="o">)</span> <span class="n">lsr</span> <span class="mi">2</span><span class="o">))</span> <span class="k">in</span>
         <span class="c">(* (((in[2] &lt;&lt; 6) &amp; 0xc0) | in[3]) *)</span>
-        <span class="k">let</span> <span class="n">i2</span> <span class="o">=</span> <span class="nn">StrUtils</span><span class="p">.</span><span class="n">safe_char</span> <span class="o">((((</span><span class="n">code</span> <span class="n">s</span> <span class="mi">2</span><span class="o">)</span> <span class="ow">lsl</span> <span class="mi">6</span><span class="o">)</span> <span class="ow">land</span> <span class="mh">0xc0</span><span class="o">)</span> <span class="ow">lor</span> <span class="o">(</span><span class="n">code</span> <span class="n">s</span> <span class="mi">3</span><span class="o">))</span> <span class="k">in</span>
+        <span class="k">let</span> <span class="n">i2</span> <span class="o">=</span> <span class="nn">StrUtils</span><span class="p">.</span><span class="n">safe_char</span> <span class="o">((((</span><span class="n">code</span> <span class="n">s</span> <span class="mi">2</span><span class="o">)</span> <span class="ow">lsl</span> <span class="mi">6</span><span class="o">)</span> <span class="ow">land</span> <span class="mi">0</span><span class="n">xc0</span><span class="o">)</span> <span class="ow">lor</span> <span class="o">(</span><span class="n">code</span> <span class="n">s</span> <span class="mi">3</span><span class="o">))</span> <span class="k">in</span>
         <span class="n">i0</span> <span class="o">^</span> <span class="n">i1</span> <span class="o">^</span> <span class="n">i2</span>
     <span class="c">(**</span>
 <span class="c">      decode a base64 encoded stream discarding padding, line breaks and noise.</span>

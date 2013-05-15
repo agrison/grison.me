@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+      <title>grison.me - Sermonis - Web chat</title>
+      <link rel="stylesheet" type="text/css" href="/media/css/style.css" />
+      <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,500,300italic' rel='stylesheet' />
+      <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+      <script type="text/javascript" src="/media/javascript/slider.js"></script>
+      <script type="text/javascript" src="/media/javascript/main.js"></script>
+      <style type="text/css">
+      .content ul li { letter-spacing: 1px; }
+      .content p { text-align: justify; font-size: 16px; }
+      </style>
+   </head>
+   <body>
+      <nav>
+         <div id="logo">g</div>
+         <h1>
+            <span class="name">// Alexandre Grison</span><br/>
+            <a href="/">@Autowired<br/><span>Geek blog;</span></a>
+         </h1>
+
+         <h2><a href="/">Home</a></h2>
+         <h2>Code</h2>
+         <ul>
+            <li><a href="/jssg">Jssg</a></li>
+            <li><a href="/jtoml">JTOML</a></li>
+            <li><a href="/kree">Kree!</a></li>
+            <li><a href="/legacy4j">Legacy4j</a></li>
+            <li><a href="/peculium">Peculium</a></li>
+            <li><a href="/scalocco">Scalocco</a></li>
+            <li><a href="/sermonis">Sermonis</a></li>
+            <li><a href="/ocamail">OCamail</a></li>
+         </ul>
+         <h2><a href="/photo">Photography</a></h2>
+         <h2><a href="/ego">Ego</a></h2>
+         <h2>Online</h2>
+         <p id="online">
+            <a href="http://twitter.com/#!/algrison"><img src="/media/images/icons/twitter.png" alt="twitter" /></a>
+            <a href="https://www.facebook.com/alexandre.grison"><img src="/media/images/icons/facebook.png" alt="facebook" /></a>
+            <a href="https://plus.google.com/114681009187194342514/posts"><img src="/media/images/icons/gplus.png" alt="google+" /></a>
+            <br />
+            <a href="http://fr.linkedin.com/pub/alexandre-grison/39/ba6/b56"><img src="/media/images/icons/linkedin.png" alt="linkedin" /></a>
+            <a href="http://github.com/agrison"><img src="/media/images/icons/github.png" alt="github" /></a>
+            <a href="http://www.flickr.com/photos/agrison"><img src="/media/images/icons/flickr.png" alt="flickr" /></a>
+         </p>
+      </nav>
+      <div class="content">
+         
+	<h2>Sermonis</h2>
+
+	<p><b>Sermonis</b> is an experimentation around Spring-Data, MongoDB, AngularJS and Websockets. Its goal is to provide a platform where users can create chat rooms (password protected or not), share a unique <span class="caps">URL</span> where friends can join and chat using only their browser.</p>
+
+	<p>To use Sermonis, build it using <code>maven</code> calling a init class that will prepare the secret tokens needed by the application, then install and run with jetty (or deploy in Tomcat 7):</p>
+
+	<p><pre class="highlight bash">mvn compile java:exec -Dexec.mainClass<span class="o">=</span>me.grison.sermonis.crypto.SermonisInit install jetty:run
+</pre></p>
+
+	<h3>GitHub project</h3>
+
+	<p>You can browse the project on my GitHub repository <a href="https://github.com/agrison/sermonis" title="">@agrison/sermonis</a>.</p>
+
+	<h2>About the name</h2>
+
+	<p><strong>sermonis</strong> means (sort-of) <strong>discussion</strong> in Latin, since a corpus of chat messages is seen as a discussion, that name make sense :-).</p>
+
+	<h2>License</h2>
+
+	<p><a href="http://opensource.org/licenses/mit-license.php" title="MIT">MIT Licence </a>.</p>
+
+	<h2>Technical</h2>
+
+	<h3>Technical Stack</h3>
+
+	<p><b>Sermonis</b> was started as an experimentation around multiple technologies, which are listed below:</p>
+
+
+<ul>
+	<li>Atmosphere</li>
+	<li>Spring with Spring-Data, Spring-Data-Mongo and Spring-Atmosphere</li>
+	<li>MongoDB</li>
+	<li>AngularJS</li>
+	<li>Websockets</li>
+
+</ul>
+	<h3>Websockets</h3>
+
+	<p>I&#8216;m using Websockets to provide realtime-like chat within browser, using a library called <a href="https://github.com/Atmosphere/atmosphere" title="">Atmosphere</a>.<br>
+The RT stuff is bound to <code>.../async/...</code> URLs and is supported by recent web-browsers. You will note that not every Java application container supports them. If you&#8216;re using Tomcat you will need Tomcat7. Jetty and Glassfish supports them too.</p>
+
+	<h3>MongoDB</h3>
+
+	<p>In <b>Sermonis</b> MongoDB is used only to save chat rooms configuration (password, administrator) and chat messages within them. Used with Spring-Data and it&#8216;s binding specific to MongoDB it is really super-easy to use.</p>
+
+	<h3>AngularJS &#38; Bootstrap</h3>
+
+	<p>I&#8216;ve used AngularJS to render the messages in the chat rooms, with some jQuery touch where I&#8216;m not enough skilled with Angular.<br>
+The skin is using the well-known-already-seen-everywhere Bootstrap <span class="caps">CSS</span> framework.</p>
+
+	<h3>Cookies</h3>
+
+	<p><b>Sermonis</b> use cookies to save user preferences (name, color, markdown, password (encrypted)). Cookies are related to one and only one room. This means that a user can have different name, color and password for every room he has access.</p>
+
+	<h3>Use cases</h3>
+
+	<p>Let&#8216;s say the url of your deployed version of <b>Sermonis</b> is <code>http://localhost/sermonis/</code>.</p>
+
+	<h4>Creating a room</h4>
+
+	<p>Just hit the index page of the application at <code>http://localhost/sermonis/</code>, you will be redirected to a newly created room.</p>
+
+	<h4>Creating a password protected room</h4>
+
+	<p>Just hit the index page of the application with a query parameter <code>withPassword</code> at <code>http://localhost/sermonis/?withPassword</code>, you will be redirected to a page asking you the password with which the room should be protected, along with a an administrator password. When you click on <code>Create</code> the room will be created and you will be redirected on it directly.</p>
+
+	<h4>Joining a room</h4>
+
+	<p>Just hit the <span class="caps">URL</span> someone shared you.</p>
+
+	<h4>Joining a password protected room</h4>
+
+	<p>Just hit the <span class="caps">URL</span> someone shared you. You will be asked for a password, providing it and clicking <code>Join</code> will redirect you to the chat room. Depending on the room configuration, you may be able to see the chat messages history.</p>
+
+	<h4>Choosing your user color</h4>
+
+	<p>Click on your username, and pick a color from the color picker. The color is stored in a cookie.</p>
+
+	<h4>Messages</h4>
+
+	<p>To send a message in the room just type it in the input at the bottom of the page and press <code>Enter</code>. <b>Sermonis</b> supports Markdown by relying on the <code>PageDown</code> Markdown <span class="caps">JS </span>Library.</p>
+
+	<p>The <span class="caps">IRC </span><code>/me</code> command is supported, and a shortcut for posting images is available with <code>img:url</code> instead of the longer markdown syntax <code>![alt](url)</code>.</p>
+
+         <div class="footer">Alexandre Grison &mdash; Generated using <a href="http://www.grison.me/jssg/">Jssg</a></div>
+		 <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-38956658-1']);
+  _gaq.push(['_setDomainName', 'grison.me']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>      </div>
+   </body>
+</html>
